@@ -34,6 +34,8 @@ import PolicySustainability from '@/views/policy/Sustainability.vue'
 import ServicesIndex from '@/views/services/Index.vue'
 import ServicesWelfare from '@/views/services/Welfare.vue'
 import ServicesDisaster from '@/views/services/Disaster.vue'
+import ServicesPlaceholder from '@/views/services/Placeholder.vue'
+import WelfareDetail from '@/views/services/WelfareDetail.vue'
 
 // Council
 import CouncilIndex from '@/views/council/Index.vue'
@@ -136,8 +138,29 @@ export const routes = [
     meta: { title: '便民服務', breadcrumb: ['首頁', '便民服務'], icon: 'pi pi-th-large', menu: true, order: 4 },
     children: [
       { path: 'welfare', name: 'services-welfare', component: ServicesWelfare, meta: { title: '社會福利', breadcrumb: ['首頁', '便民服務', '社會福利'] } },
-      { path: 'disaster', name: 'services-disaster', component: ServicesDisaster, meta: { title: '防災專區', breadcrumb: ['首頁', '便民服務', '防災專區'] } },
-    ]
+      // 社會福利詳文（九宮格點進來）
+      { 
+        path: 'welfare/:slug',
+        name: 'services-welfare-detail',
+        component: WelfareDetail,
+        meta: {
+          title: '社會福利',
+          breadcrumb: ['首頁', '便民服務', '社會福利'],
+          hidden: true // <— 新增：不要出現在頂層選單
+        }
+      },
+      { path: 'disaster', name: 'services-disaster', component: ServicesDisaster, 
+        meta: { title: '防災專區', breadcrumb: ['首頁', '便民服務', '防災專區'] } },
+      // 以下暫定頁都先用共用 Placeholder.vue
+      { path: 'military',   name: 'services-military',   component: ServicesPlaceholder, meta: { title: '兵役資訊' } },
+      { path: 'kindergarten', name: 'services-kindergarten', component: ServicesPlaceholder, meta: { title: '鄉立幼兒園' } },
+      { path: 'grace-hall', name: 'services-grace-hall', component: ServicesPlaceholder, meta: { title: '鹿谷鄉路思堂' } },
+      { path: 'links',      name: 'services-links',      component: ServicesPlaceholder, meta: { title: '相關連結' } },
+      { path: 'faq',        name: 'services-faq',        component: ServicesPlaceholder, meta: { title: '常見問題' } },
+      { path: 'library',    name: 'services-library',    component: ServicesPlaceholder, meta: { title: '鹿谷鄉立圖書館' } },
+      { path: 'conflict',   name: 'services-conflict',   component: ServicesPlaceholder, meta: { title: '公職人員利益衝突迴避法身分關係公開專區' } },
+      { path: 'drought',    name: 'services-drought',    component: ServicesPlaceholder, meta: { title: '抗旱專區' } },
+      ]
   },
 
   // 代表會（僅保留：主席介紹、組織介紹）
@@ -219,7 +242,14 @@ export function getTopMenuItems() {
       icon: r.meta.icon,
       to: { name: r.name },
       items: (r.children || [])
-        .filter(c => c.meta && c.meta.title && !c.meta.externalUrl)
+        .filter(c =>
+          c.meta &&
+          c.meta.title &&
+          !c.meta.externalUrl &&
+          !c.meta.hidden &&                // <— 新增：忽略隱藏
+          !(typeof c.path === 'string' && c.path.includes(':')) // <— 新增：忽略動態路由
+        )
         .map(c => ({ label: c.meta.title, to: { name: c.name } }))
     }))
 }
+
