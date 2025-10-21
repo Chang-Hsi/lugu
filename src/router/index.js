@@ -114,7 +114,16 @@ export const routes = [
     children: [
       { path: 'open', name: 'policy-open', component: PolicyOpenData, meta: { title: '資訊公開', breadcrumb: ['首頁', '法規政策', '資訊公開'] } },
       { path: 'budget', name: 'policy-budget', component: PolicyBudget, meta: { title: '年度預算', breadcrumb: ['首頁', '法規政策', '年度預算'] } },
-      { path: 'sustainability', name: 'policy-sustainability', component: PolicySustainability, meta: { title: '永續提升', breadcrumb: ['首頁', '法規政策', '永續提升'] } }
+      { path: 'sustainability', name: 'policy-sustainability', component: PolicySustainability, meta: { title: '永續提升', breadcrumb: ['首頁', '法規政策', '永續提升'] } },
+      { path: 'policy-related', name: 'policy-related', component: PolicyOpenData, meta: { title: '政策相關', breadcrumb: ['首頁', '法規政策', '政策相關'] } },
+      // 新增：側欄八個項目（皆暫用同一畫面，之後再替換）
+      { path: 'annual-expense', name: 'policy-annual-expense', component: PolicyOpenData, meta: { title: '年度經費', breadcrumb: ['首頁', '法規政策', '年度經費'] } },
+      { path: 'open-data', name: 'policy-open-data', component: PolicyOpenData, meta: { title: '資訊公開', breadcrumb: ['首頁', '法規政策', '資訊公開'] } },
+      { path: 'integrity', name: 'policy-integrity', component: PolicyOpenData, meta: { title: '廉政園地', breadcrumb: ['首頁', '法規政策', '廉政園地'] } },
+      { path: 'construction', name: 'policy-construction', component: PolicyOpenData, meta: { title: '施工工程', breadcrumb: ['首頁', '法規政策', '施工工程'] } },
+      { path: 'debt', name: 'policy-debt', component: PolicyOpenData, meta: { title: '最新債務訊息', breadcrumb: ['首頁', '法規政策', '最新債務訊息'] } },
+      { path: 'post-disaster', name: 'policy-post-disaster', component: PolicyOpenData, meta: { title: '災後復建審議', breadcrumb: ['首頁', '法規政策', '災後復建審議'] } },
+      { path: 'pedestrian-safety', name: 'policy-pedestrian-safety', component: PolicyOpenData, meta: { title: '永續提升人行安全計畫', breadcrumb: ['首頁', '法規政策', '永續提升人行安全計畫'] } },
     ]
   },
 
