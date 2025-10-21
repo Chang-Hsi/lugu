@@ -2,21 +2,16 @@
   <div class="mx-auto max-w-7xl px-4 py-6">
     <div class="flex gap-6">
       <!-- 側欄：分類選單 -->
-      <aside class="hidden lg:block w-56 shrink-0" aria-label="熱門消息分類選單">
-        <nav
-          class="flex flex-col rounded-lg border border-slate-200 bg-white overflow-hidden"
-        >
-          <RouterLink
-            v-for="item in sideMenu"
-            :key="item.label"
-            :to="item.to"
-            class="px-4 py-3 border-b border-gray-200 last:border-b-0 hover:bg-emerald-50 focus:bg-emerald-50 outline-none"
-            :class="{ 'text-emerald-700 font-semibold': $route.name === item.activeName }"
-          >
-            {{ item.label }}
-          </RouterLink>
-        </nav>
-      </aside>
+      <NewsSidebar
+        class="hidden lg:block w-56 shrink-0"
+        :items="[
+          { label: '最新消息', name: 'news-latest' },
+          { label: '新聞稿', name: 'news-press' },
+          { label: '招標公告', name: 'news-tenders' },
+          { label: '徵才公告', name: 'news-jobs' },
+          { label: '活動訊息', name: 'news-events' },
+        ]"
+      />
 
       <!-- 主內容 -->
       <main class="flex-1 min-w-0">
@@ -235,7 +230,7 @@
  */
 import { ref, computed, onMounted } from "vue";
 import { useRouter, useRoute, RouterLink } from "vue-router";
-
+import NewsSidebar from "@/components/news/Sidebar.vue";
 import Breadcrumb from "primevue/breadcrumb";
 import Calendar from "primevue/calendar";
 import InputText from "primevue/inputtext";
@@ -247,15 +242,6 @@ import Paginator from "primevue/paginator";
 
 // ————————————————————
 // 側欄分類（對應你的 router children）
-const sideMenu = [
-  { label: "最新消息", to: { name: "news-latest" }, activeName: "news-latest" },
-  {
-    label: "政令宣導",
-    to: { name: "news-announcements" },
-    activeName: "news-announcements",
-  },
-  { label: "活動專區", to: { name: "news-events" }, activeName: "news-events" },
-];
 
 // 麵包屑
 const breadcrumbHome = { icon: "pi pi-home", to: { name: "home" } };

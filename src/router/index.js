@@ -9,6 +9,10 @@ import NewsIndex from '@/views/news/Index.vue'
 import NewsLatest from '@/views/news/Latest.vue'
 import NewsAnnouncements from '@/views/news/Announcements.vue'
 import NewsEvents from '@/views/news/Events.vue'
+import NewsPress from '@/views/news/Press.vue'
+import NewsTenders from '@/views/news/Tenders.vue'
+import NewsJobs from '@/views/news/Jobs.vue'
+
 
 // About
 import AboutIndex from '@/views/about/Index.vue'
@@ -68,7 +72,11 @@ export const routes = [
     children: [
       { path: 'latest', name: 'news-latest', component: NewsLatest, meta: { title: '最新消息', breadcrumb: ['首頁', '熱門消息', '最新消息'] } },
       { path: 'announcements', name: 'news-announcements', component: NewsAnnouncements, meta: { title: '政令宣導', breadcrumb: ['首頁', '熱門消息', '政令宣導'] } },
-      { path: 'events', name: 'news-events', component: NewsEvents, meta: { title: '活動專區', breadcrumb: ['首頁', '熱門消息', '活動專區'] } }
+      { path: 'events', name: 'news-events', component: NewsEvents, meta: { title: '活動專區', breadcrumb: ['首頁', '熱門消息', '活動專區'] } },
+      { path: 'press', name: 'news-press', component: NewsPress, meta: { title: '新聞稿', breadcrumb: ['首頁', '熱門消息', '新聞稿'] } },
+      { path: 'tenders', name: 'news-tenders', component: NewsTenders, meta: { title: '招標公告', breadcrumb: ['首頁', '熱門消息', '招標公告'] } },
+      { path: 'jobs', name: 'news-jobs', component: NewsJobs, meta: { title: '徵才公告', breadcrumb: ['首頁', '熱門消息', '徵才公告'] } },
+
     ]
   },
 
@@ -82,6 +90,12 @@ export const routes = [
     children: [
       { path: 'overview', name: 'about-overview', component: AboutOverview, meta: { title: '鹿谷簡介', breadcrumb: ['首頁', '關於本鄉', '鹿谷簡介'] } },
       { path: 'history', name: 'about-history', component: AboutHistory, meta: { title: '歷史沿革', breadcrumb: ['首頁', '關於本鄉', '歷史沿革'] } },
+      { path: 'geography',    name: 'about-geography',    component: AboutOverview, meta: { title: '自然環境' } },
+      { path: 'specialty',    name: 'about-specialty',    component: AboutOverview, meta: { title: '特產介紹' } },
+      { path: 'traffic',      name: 'about-traffic',      component: AboutOverview, meta: { title: '交通運輸' } },
+      { path: 'departments',  name: 'about-departments',  component: AboutOverview, meta: { title: '各課室業務' } },
+      { path: 'district-map', name: 'about-district-map', component: AboutOverview, meta: { title: '行政區域圖' } },
+      { path: 'chronicle',    name: 'about-chronicle',    component: AboutOverview, meta: { title: '鄉志' } },
 
       // 行政區
       { path: 'districts', name: 'about-districts', component: AboutDistrictsIndex, meta: { title: '行政區', breadcrumb: ['首頁', '關於本鄉', '行政區'] } },
