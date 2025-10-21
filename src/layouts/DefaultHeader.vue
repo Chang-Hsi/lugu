@@ -1,0 +1,350 @@
+<!-- src/layouts/DefaultHeader.vue -->
+<template>
+  <header id="header" class="w-full">
+    <!-- 跳至主內容（鍵盤使用者） -->
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 px-4 py-2 rounded bg-yellow-400 text-slate-900"
+    >
+      跳至主內容
+    </a>
+
+    <!-- 無障礙提示列 -->
+    <div
+      class="w-full bg-emerald-800 text-white text-xs"
+      role="region"
+      aria-label="無障礙快速鍵說明列"
+    >
+      <div class="mx-auto max-w-7xl px-4 py-1 flex items-center justify-between gap-4">
+        <p>
+          無障礙快速鍵：Alt+U(上方功能) Alt+C(中央內容) Alt+S(下方功能) Alt+Z(網站導覽)
+        </p>
+        <nav class="hidden sm:flex items-center gap-3" aria-label="網站輔助選單">
+          <span class="inline-flex items-center gap-1">
+            <svg
+              class="h-4 w-4"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2Zm6.93 9h-3.11A12.9 12.9 0 0 0 14.77 6a8 8 0 0 1 4.16 5ZM9.9 6c.67-.1 1.37-.15 2.1-.15s1.43.05 2.1.15a12.9 12.9 0 0 1 1.42 5H8.48A12.9 12.9 0 0 1 9.9 6ZM7.29 4a8 8 0 0 0-4.22 7h3.11c.27-2.13.93-4.01 2-5.65A8 8 0 0 0 7.29 4ZM6.18 13H3.07a8 8 0 0 0 4.22 7 12.9 12.9 0 0 1-1.11-7Zm2.47 0h6.7a12.9 12.9 0 0 1-1.43 5 15.9 15.9 0 0 1-3.84 0 12.9 12.9 0 0 1-1.43-5Zm8.15 0c.13 2.43-.31 4.85-1.24 7a8 8 0 0 0 4.17-7h-2.93Z"
+              />
+            </svg>
+            <span class="whitespace-nowrap">中文</span>
+          </span>
+          <span class="opacity-70" aria-hidden="true">|</span>
+          <RouterLink
+            class="hover:underline focus:outline-none focus:underline"
+            :to="{ name: 'home' }"
+            hreflang="en"
+          >
+            English
+          </RouterLink>
+          <span class="opacity-70" aria-hidden="true">|</span>
+          <RouterLink
+            class="hover:underline focus:outline-none focus:underline"
+            :to="{ name: 'sitemap' }"
+            accesskey="Z"
+            aria-describedby="ak-z"
+          >
+            網站導覽
+          </RouterLink>
+          <span id="ak-z" class="sr-only">此連結 Accesskey 為 Alt+Z</span>
+        </nav>
+      </div>
+    </div>
+
+    <!-- 主列：Logo / 標題 / 搜尋 / 行動版選單鈕 -->
+    <div class="w-full bg-white">
+      <div class="mx-auto max-w-7xl px-4 py-4">
+        <div class="flex items-center justify-between gap-4">
+          <RouterLink
+            :to="{ name: 'home' }"
+            class="flex items-center gap-4 min-w-0 focus:outline-none focus:ring-2 focus:ring-emerald-600 rounded-md"
+            aria-label="回首頁：南投縣鹿谷鄉公所"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=200"
+              alt="鹿谷鄉公所標誌"
+              class="h-14 w-14 rounded-full object-cover shrink-0"
+            />
+            <div class="flex flex-col min-w-0">
+              <h1 class="text-xl sm:text-2xl font-extrabold text-emerald-900 truncate">
+                南投縣鹿谷鄉公所
+              </h1>
+              <p class="text-sm text-slate-600">Lugu Township Office, Nantou County</p>
+            </div>
+          </RouterLink>
+
+          <!-- 搜尋（桌機） -->
+          <form
+            class="hidden md:flex items-center justify-end"
+            role="search"
+            :action="searchAction"
+            method="GET"
+            aria-label="站內搜尋"
+          >
+            <label for="site-search" class="sr-only">輸入關鍵字</label>
+            <div class="relative w-[360px] max-w-[50vw]">
+              <span class="absolute inset-y-0 left-3 flex items-center">
+                <svg
+                  class="h-4 w-4 text-slate-400"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M21 20.586 16.657 16.24A8 8 0 1 0 18 18.586L22.586 23 21 20.586ZM4 10a6 6 0 1 1 12 0A6 6 0 0 1 4 10Z"
+                  />
+                </svg>
+              </span>
+              <input
+                id="site-search"
+                name="q"
+                type="search"
+                inputmode="search"
+                autocomplete="off"
+                placeholder="搜尋網站內容…"
+                class="w-full rounded-full bg-slate-100 pl-9 pr-12 py-2 text-sm placeholder-slate-400 outline-none focus:ring-2 focus:ring-emerald-600"
+              />
+              <button
+                type="submit"
+                class="absolute right-1 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-full text-sm bg-emerald-700 text-white hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-600"
+              >
+                搜尋
+              </button>
+            </div>
+          </form>
+
+          <!-- 行動版：漢堡鈕 -->
+          <button
+            type="button"
+            class="md:hidden inline-flex items-center justify-center rounded-lg h-10 w-10 text-slate-700 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-600"
+            :aria-expanded="String(menuOpen)"
+            :aria-controls="'primary-nav'"
+            @click="menuOpen = !menuOpen"
+          >
+            <span class="sr-only">開啟主選單</span>
+            <svg
+              v-if="!menuOpen"
+              class="h-6 w-6"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M3 6h18v2H3V6Zm0 5h18v2H3v-2Zm0 5h18v2H3v-2Z" />
+            </svg>
+            <svg
+              v-else
+              class="h-6 w-6"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                d="M18.3 5.71 12 12.01l-6.29-6.3-1.42 1.42 6.3 6.29-6.3 6.29 1.42 1.42 6.29-6.3 6.29 6.3 1.42-1.42-6.3-6.29 6.3-6.29-1.42-1.42Z"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ===== 主導覽列（桌機）—新增：滑鼠懸浮下拉，來源=router children ===== -->
+      <div class="border-t border-slate-200 hidden md:block">
+        <div class="mx-auto max-w-7xl px-4 relative">
+          <nav
+            id="primary-nav"
+            class="h-12 flex items-center gap-6 text-slate-800"
+            aria-label="主選單"
+            role="menubar"
+          >
+            <!-- 逐一產生頂層項與其下拉 -->
+            <div
+              v-for="(m, i) in menus"
+              :key="m.label"
+              class="relative group"
+              @mouseenter="openIndex = i"
+              @mouseleave="openIndex = -1"
+            >
+              <!-- 頂層連結：可直接點到群組頁 -->
+              <RouterLink
+                class="inline-flex items-center gap-1 px-1 py-2 hover:text-emerald-700 focus:outline-none focus:text-emerald-700"
+                :to="m.to"
+                role="menuitem"
+                :aria-haspopup="m.items?.length ? 'true' : 'false'"
+                :aria-expanded="openIndex === i ? 'true' : 'false'"
+              >
+                <span>{{ m.label }}</span>
+                <svg
+                  v-if="m.items?.length"
+                  class="h-4 w-4"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M7 10l5 5 5-5H7z" />
+                </svg>
+              </RouterLink>
+
+              <!-- 下拉選單 -->
+              <div
+                v-if="m.items?.length"
+                class="absolute left-0 top-full z-50 hidden group-hover:flex group-focus-within:flex"
+                :class="openIndex === i ? 'flex' : ''"
+              >
+                <div
+                  class="mt-1 min-w-[200px] rounded-md border border-slate-200 bg-white shadow-lg overflow-hidden"
+                  role="menu"
+                  :aria-label="m.label + ' 子選單'"
+                >
+                  <RouterLink
+                    v-for="it in m.items"
+                    :key="it.label"
+                    :to="it.to"
+                    role="menuitem"
+                    class="block px-4 py-2 text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 focus:outline-none focus:bg-emerald-50 whitespace-nowrap"
+                  >
+                    {{ it.label }}
+                  </RouterLink>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+        <div class="h-[2px] bg-amber-800"></div>
+      </div>
+      <!-- ===== /主導覽列（桌機） ===== -->
+
+      <!-- 行動版：展開面板（原樣保留） -->
+      <div v-show="menuOpen" class="md:hidden border-t border-slate-200">
+        <div
+          class="mx-auto max-w-7xl px-4 py-3 flex flex-col gap-3"
+          role="dialog"
+          aria-label="行動版主選單"
+        >
+          <!-- 搜尋（行動版） -->
+          <form
+            class="flex items-stretch"
+            role="search"
+            :action="searchAction"
+            method="GET"
+            aria-label="站內搜尋（行動版）"
+          >
+            <label for="m-site-search" class="sr-only">輸入關鍵字</label>
+            <div class="relative flex-1">
+              <span class="absolute inset-y-0 left-3 flex items-center">
+                <svg
+                  class="h-4 w-4 text-slate-400"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M21 20.586 16.657 16.24A8 8 0 1 0 18 18.586L22.586 23 21 20.586ZM4 10a6 6 0 1 1 12 0A6 6 0 0 1 4 10Z"
+                  />
+                </svg>
+              </span>
+              <input
+                id="m-site-search"
+                name="q"
+                type="search"
+                inputmode="search"
+                autocomplete="off"
+                placeholder="搜尋網站內容…"
+                class="w-full rounded-full bg-slate-100 pl-9 pr-24 py-2 text-sm placeholder-slate-400 outline-none focus:ring-2 focus:ring-emerald-600"
+              />
+              <button
+                type="submit"
+                class="absolute right-1 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-full text-sm bg-emerald-700 text-white hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-600"
+              >
+                搜尋
+              </button>
+            </div>
+          </form>
+
+          <!-- 連結們（行動版仍用單層列出，需求如要展開 children 再告訴我） -->
+          <nav class="flex flex-col" aria-label="主選單（行動版）">
+            <RouterLink
+              class="py-2 text-slate-800 hover:text-emerald-700 focus:outline-none focus:text-emerald-700"
+              :to="{ name: 'news' }"
+              >熱門消息</RouterLink
+            >
+            <RouterLink
+              class="py-2 text-slate-800 hover:text-emerald-700 focus:outline-none focus:text-emerald-700"
+              :to="{ name: 'about' }"
+              >關於鹿谷</RouterLink
+            >
+            <RouterLink
+              class="py-2 text-slate-800 hover:text-emerald-700 focus:outline-none focus:text-emerald-700"
+              :to="{ name: 'policy' }"
+              >法規政策</RouterLink
+            >
+            <RouterLink
+              class="py-2 text-slate-800 hover:text-emerald-700 focus:outline-none focus:text-emerald-700"
+              :to="{ name: 'services' }"
+              >便民服務</RouterLink
+            >
+            <RouterLink
+              class="py-2 text-slate-800 hover:text-emerald-700 focus:outline-none focus:text-emerald-700"
+              :to="{ name: 'council' }"
+              >代表會</RouterLink
+            >
+            <RouterLink
+              class="py-2 text-slate-800 hover:text-emerald-700 focus:outline-none focus:text-emerald-700"
+              :to="{ name: 'online' }"
+              >線上服務交流</RouterLink
+            >
+            <div
+              class="mt-1 flex items-center gap-3 text-sm text-slate-700 pt-2 border-t"
+            >
+              <span class="inline-flex items-center gap-1">
+                <svg
+                  class="h-4 w-4"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M12 2a10 10 0 1 0 .001 20.001A10 10 0 0 0 12 2Z" />
+                </svg>
+                中文
+              </span>
+              <span class="opacity-60" aria-hidden="true">|</span>
+              <RouterLink
+                class="hover:underline focus:outline-none focus:underline"
+                :to="{ name: 'home' }"
+                hreflang="en"
+                >English</RouterLink
+              >
+              <span class="opacity-60" aria-hidden="true">|</span>
+              <RouterLink
+                class="hover:underline focus:outline-none focus:underline"
+                :to="{ name: 'sitemap' }"
+                >網站導覽</RouterLink
+              >
+            </div>
+          </nav>
+        </div>
+        <div class="h-[2px] bg-amber-800"></div>
+      </div>
+    </div>
+  </header>
+</template>
+
+<script setup>
+import { ref, computed } from "vue";
+import { RouterLink } from "vue-router";
+import { getTopMenuItems } from "@/router"; // 直接使用你 router 匯出的工具
+
+// 行動版開闔
+const menuOpen = ref(false);
+
+// 搜尋頁
+const searchAction = "/search";
+
+// 產生（頂層＋children）選單資料
+const menus = computed(() => getTopMenuItems());
+
+// 控制哪一個下拉打開（只用於 aria 與 v-if，實際顯示仍有 group-hover / focus-within）
+const openIndex = ref(-1);
+</script>
