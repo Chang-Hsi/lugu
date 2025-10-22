@@ -157,6 +157,16 @@ function goSub(to) {
   if (to) router.push(to);
 }
 
+const deepGreenBtnPT = {
+  root: {
+    class:
+      "!bg-emerald-700 hover:!bg-emerald-800 !border-emerald-700 " +
+      "!text-white focus:!ring-2 focus:!ring-emerald-900 rounded-md",
+  },
+  label: { class: "font-semibold" },
+  icon: { class: "!text-white" },
+};
+
 /* 字級 */
 const fontScale = ref(localStorage.getItem("about.font") || "md");
 const fontSizeClasses = computed(() => {
