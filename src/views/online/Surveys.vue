@@ -2,7 +2,7 @@
 <template>
   <div class="mx-auto max-w-7xl px-4 py-6">
     <div class="flex gap-6">
-      <ServicesSidebar class="hidden lg:block text-xl" :items="onlineMenu" />
+      <OnlineSidebar class="hidden lg:block text-xl" :items="onlineMenu" />
       <main class="flex-1 min-w-0" id="main">
         <header class="flex items-end justify-between gap-4">
           <div class="min-w-0">
@@ -102,7 +102,7 @@
 <script setup>
 import { ref, computed, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import ServicesSidebar from "@/components/services/Sidebar.vue";
+import OnlineSidebar from "@/components/online/Sidebar.vue";
 import Breadcrumb from "primevue/breadcrumb";
 import Button from "primevue/button";
 import DataTable from "primevue/datatable";
