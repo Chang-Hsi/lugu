@@ -17,6 +17,7 @@ import NewsJobs from '@/views/news/Jobs.vue'
 // About
 import AboutIndex from '@/views/about/Index.vue'
 import AboutOverview from '@/views/about/Overview.vue'
+import AboutIntroduce from '@/views/about/Introduce.vue'
 import AboutHistory from '@/views/about/History.vue'
 
 // About → Districts (13 村)
@@ -93,6 +94,7 @@ export const routes = [
     meta: { title: '關於本鄉', breadcrumb: ['首頁', '關於本鄉'], icon: 'pi pi-info-circle', menu: true, order: 2 },
     children: [
       { path: 'overview', name: 'about-overview', component: AboutOverview, meta: { title: '鹿谷簡介', breadcrumb: ['首頁', '關於本鄉', '鹿谷簡介'] } },
+      { path: 'introduce', name: 'about-introduce', component: AboutIntroduce, meta: { title: '公所介紹', breadcrumb: ['首頁', '關於本鄉', '公所介紹'] } },
       { path: 'history', name: 'about-history', component: AboutHistory, meta: { title: '歷史沿革', breadcrumb: ['首頁', '關於本鄉', '歷史沿革'] } },
       { path: 'geography',    name: 'about-geography',    component: AboutOverview, meta: { title: '自然環境' } },
       { path: 'specialty',    name: 'about-specialty',    component: AboutOverview, meta: { title: '特產介紹' } },
