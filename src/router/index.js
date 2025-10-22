@@ -44,7 +44,9 @@ import CouncilOrganization from '@/views/council/Organization.vue'
 
 // Online
 import OnlineIndex from '@/views/online/Index.vue'
+import OnlineMenu from '@/views/online/Menu.vue'
 import OnlineSurveys from '@/views/online/Surveys.vue'
+import SurveyDetail from '@/views/online/SurveyDetail.vue'
 import OnlineVotes from '@/views/online/Votes.vue'
 
 // Common & System
@@ -195,13 +197,35 @@ export const routes = [
   {
     path: '/online',
     name: 'online',
-    component: OnlineIndex,
-    redirect: { name: 'online-surveys' },
+    component: OnlineIndex,                // 你既有的外層 Layout（可保留）
+    redirect: { name: 'online-menu' },     // 進入就看到外頁目錄
     meta: { title: '線上服務交流', breadcrumb: ['首頁', '線上服務交流'], icon: 'pi pi-send', menu: true, order: 6 },
     children: [
-      { path: 'surveys', name: 'online-surveys', component: OnlineSurveys, meta: { title: '問卷調查', breadcrumb: ['首頁', '線上服務交流', '問卷調查'] } },
-      { path: 'votes', name: 'online-votes', component: OnlineVotes, meta: { title: '線上投票', breadcrumb: ['首頁', '線上服務交流', '線上投票'] } },
+      { path: '', name: 'online-menu', component: OnlineMenu, meta: { title: '線上服務交流', breadcrumb: ['首頁', '線上服務交流'] }},
+
+      // 子頁（暫都可用同一支內容骨架，之後替換）
+      { path: 'surveys',           name: 'online-surveys',        component: OnlineSurveys, meta: { title: '問卷調查',     breadcrumb: ['首頁', '線上服務交流', '問卷調查'] } },
+      { path: 'votes',             name: 'online-votes',          component: OnlineSurveys, meta: { title: '線上投票',     breadcrumb: ['首頁', '線上服務交流', '線上投票'] } },
+      { path: 'forms',             name: 'online-forms',          component: OnlineSurveys, meta: { title: '表單下載',     breadcrumb: ['首頁', '線上服務交流', '表單下載'] } },
+      { path: 'signup',            name: 'online-signup',         component: OnlineSurveys, meta: { title: '活動報名',     breadcrumb: ['首頁', '線上服務交流', '活動報名'] } },
+      { path: 'streetlight',       name: 'online-streetlight',    component: OnlineSurveys, meta: { title: '路燈報修',     breadcrumb: ['首頁', '線上服務交流', '路燈報修'] } },
+      { path: 'road',              name: 'online-road',           component: OnlineSurveys, meta: { title: '道路報修',     breadcrumb: ['首頁', '線上服務交流', '道路報修'] } },
+      { path: 'mirror',            name: 'online-mirror',         component: OnlineSurveys, meta: { title: '反射鏡報修',   breadcrumb: ['首頁', '線上服務交流', '反射鏡報修'] } },
+      { path: 'disaster',          name: 'online-disaster',       component: OnlineSurveys, meta: { title: '災害通報',     breadcrumb: ['首頁', '線上服務交流', '災害通報'] } },
+      { path: 'disaster-query',    name: 'online-disaster-query', component: OnlineSurveys, meta: { title: '災害通報查詢', breadcrumb: ['首頁', '線上服務交流', '災害通報查詢'] } },
     ]
+  },
+
+  // --- 問卷填寫（放在最外層；新分頁開啟使用） ---
+  {
+    path: '/survey/:slug',
+    name: 'survey-detail',
+    component: SurveyDetail,
+    meta: {
+      title: '問卷填寫',
+      breadcrumb: ['首頁', '線上服務交流', '問卷填寫'],
+      hidden: true // 不進頂層選單
+    }
   },
 
   // 共用：網站導覽 / 搜尋 / 無障礙
