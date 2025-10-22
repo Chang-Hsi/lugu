@@ -1,9 +1,8 @@
 <template>
   <div class="mx-auto max-w-7xl px-4 py-6">
     <div class="flex gap-6">
-      <!-- 側欄：分類選單 -->
       <NewsSidebar
-        class="hidden lg:block w-56 shrink-0"
+        class="hidden lg:block w-56 shrink-0 text-xl"
         :items="[
           { label: '最新消息', name: 'news-latest' },
           { label: '新聞稿', name: 'news-press' },
@@ -13,9 +12,7 @@
         ]"
       />
 
-      <!-- 主內容 -->
       <main class="flex-1 min-w-0">
-        <!-- 標題列 -->
         <header class="flex items-end justify-between gap-4">
           <div class="min-w-0">
             <h1
@@ -23,20 +20,22 @@
             >
               最新消息
             </h1>
-
-            <!-- 麵包屑 -->
-            <Breadcrumb class="mt-2" :model="breadcrumbModel" :home="breadcrumbHome" />
+            <Breadcrumb
+              class="mt-2 text-xl"
+              :model="breadcrumbModel"
+              :home="breadcrumbHome"
+            />
           </div>
 
-          <!-- 字級＋列印 -->
           <div class="flex items-center gap-2">
-            <span class="text-sm text-slate-500 mr-1">字級</span>
+            <span class="text-lg text-slate-500 mr-1">字級</span>
             <Button
               label="小"
               size="small"
               severity="secondary"
               :outlined="fontScale !== 'sm'"
               :raised="fontScale === 'sm'"
+              class="text-xl"
               @click="setFont('sm')"
             />
             <Button
@@ -45,6 +44,7 @@
               severity="secondary"
               :outlined="fontScale !== 'md'"
               :raised="fontScale === 'md'"
+              class="text-xl"
               @click="setFont('md')"
             />
             <Button
@@ -53,6 +53,7 @@
               severity="secondary"
               :outlined="fontScale !== 'lg'"
               :raised="fontScale === 'lg'"
+              class="text-xl"
               @click="setFont('lg')"
             />
             <div class="w-px h-6 bg-slate-200 mx-2" aria-hidden="true"></div>
@@ -61,20 +62,16 @@
               label="列印"
               size="small"
               severity="help"
+              class="text-xl"
               @click="printPage"
             />
           </div>
         </header>
 
-        <!-- 篩選區塊 -->
-        <section
-          class="mt-5 rounded-lg border border-slate-200 bg-white p-4"
-          aria-label="搜尋與篩選"
-        >
+        <section class="mt-5 rounded-lg border border-slate-200 bg-white p-4">
           <form class="flex flex-col gap-3 md:flex-row md:items-end md:flex-wrap">
-            <!-- 開始日期 -->
             <div class="flex flex-col">
-              <label for="start" class="text-sm font-medium text-slate-700 mb-1"
+              <label for="start" class="text-lg font-medium text-slate-700 mb-1"
                 >開始日期</label
               >
               <Calendar
@@ -83,15 +80,14 @@
                 date-format="yy/mm/dd"
                 show-icon
                 inputId="start"
-                input-class="!w-44"
+                input-class="!w-44 text-xl"
                 :max-date="filters.endDate || undefined"
-                :pt="{ input: { root: 'w-44' } }"
+                :pt="{ input: { root: 'w-44 text-xl' } }"
               />
             </div>
 
-            <!-- 結束日期 -->
             <div class="flex flex-col">
-              <label for="end" class="text-sm font-medium text-slate-700 mb-1"
+              <label for="end" class="text-lg font-medium text-slate-700 mb-1"
                 >結束日期</label
               >
               <Calendar
@@ -100,15 +96,14 @@
                 date-format="yy/mm/dd"
                 show-icon
                 inputId="end"
-                input-class="!w-44"
+                input-class="!w-44 text-xl"
                 :min-date="filters.startDate || undefined"
-                :pt="{ input: { root: 'w-44' } }"
+                :pt="{ input: { root: 'w-44 text-xl' } }"
               />
             </div>
 
-            <!-- 關鍵字 -->
             <div class="flex-1 min-w-[220px]">
-              <label for="kw" class="text-sm font-medium text-slate-700 mb-1"
+              <label for="kw" class="text-lg font-medium text-slate-700 mb-1"
                 >關鍵字</label
               >
               <div class="flex items-center gap-2">
@@ -117,15 +112,21 @@
                     id="kw"
                     v-model="filters.keyword"
                     placeholder="輸入關鍵字"
-                    class="w-full"
+                    class="w-full text-xl"
                     @keyup.enter="search"
                   />
                 </span>
-                <Button label="搜尋" icon="pi pi-search" @click.prevent="search" />
+                <Button
+                  label="搜尋"
+                  icon="pi pi-search"
+                  class="text-xl"
+                  @click.prevent="search"
+                />
                 <Button
                   label="清除"
                   severity="secondary"
                   icon="pi pi-filter-slash"
+                  class="text-xl"
                   @click.prevent="clearFilters"
                 />
               </div>
@@ -133,7 +134,6 @@
           </form>
         </section>
 
-        <!-- 列表 -->
         <section
           :class="[
             'mt-4 rounded-lg border border-slate-200 bg-white p-2 md:p-3',
@@ -156,7 +156,7 @@
           >
             <Column header="分類名稱" field="categoryText" style="width: 140px">
               <template #body="{ data }">
-                <Tag :value="data.categoryText" severity="success" class="text-xs" />
+                <Tag :value="data.categoryText" severity="success" class="text-base" />
               </template>
             </Column>
 
@@ -193,9 +193,8 @@
             </Column>
           </DataTable>
 
-          <!-- 分頁表 -->
           <div class="mt-3 flex items-center justify-between gap-3">
-            <div class="text-sm text-slate-500">
+            <div class="text-lg text-slate-500">
               顯示第
               <span class="font-semibold">{{ pageFirst + 1 }}</span>
               筆至
@@ -212,6 +211,7 @@
               :rows="rows"
               :total-records="filteredItems.length"
               :rows-per-page-options="[10, 20, 50]"
+              class="text-xl"
               @page="onPage"
             />
           </div>
@@ -222,14 +222,22 @@
 </template>
 
 <script setup>
-/**
- * 需求：
- * - Tailwind 佈局
- * - PrimeVue：Breadcrumb、Calendar、InputText、Button、DataTable、Column、Tag、Paginator
- * - 純前端假資料＋UI 行為（搜尋/篩選/分頁/字級/列印）
- */
+/*
+  「所有可見文字」+2 級（Tailwind 標準階梯）：
+  - text-xs → text-base
+  - text-sm → text-lg
+  - text-base → text-xl
+  - text-lg → text-2xl
+  - text-xl → text-3xl
+  - text-2xl → text-4xl
+  - text-3xl → text-5xl
+  同時調整：
+  - Breadcrumb/Sidebar/Paginator/Button/InputText/Calendar 的文字大小以 class 或 pt 傳入
+  - 自訂字級控制（fontScale）整體上移 2 級：sm→小但放大、md→預設放大、lg→更大
+*/
+
 import { ref, computed, onMounted } from "vue";
-import { useRouter, useRoute, RouterLink } from "vue-router";
+import { useRouter } from "vue-router";
 import NewsSidebar from "@/components/news/Sidebar.vue";
 import Breadcrumb from "primevue/breadcrumb";
 import Calendar from "primevue/calendar";
@@ -240,27 +248,21 @@ import Column from "primevue/column";
 import Tag from "primevue/tag";
 import Paginator from "primevue/paginator";
 
-// ————————————————————
-// 側欄分類（對應你的 router children）
-
-// 麵包屑
 const breadcrumbHome = { icon: "pi pi-home", to: { name: "home" } };
 const breadcrumbModel = [
   { label: "熱門消息", to: { name: "news" } },
   { label: "最新消息" },
 ];
 
-// ————————————————————
-// 字級（大中小）視覺縮放
 const fontScale = ref(localStorage.getItem("news.font") || "md");
 const fontSizeClasses = computed(() => {
   switch (fontScale.value) {
     case "sm":
-      return { title: "text-2xl", body: "text-[0.95rem]" };
+      return { title: "text-4xl", body: "text-lg" };
     case "lg":
-      return { title: "text-4xl", body: "text-[1.1rem]" };
+      return { title: "text-6xl", body: "text-2xl" };
     default:
-      return { title: "text-3xl", body: "text-base" };
+      return { title: "text-5xl", body: "text-xl" };
   }
 });
 function setFont(s) {
@@ -271,8 +273,6 @@ function printPage() {
   window.print();
 }
 
-// ————————————————————
-// 篩選狀態
 const filters = ref({
   startDate: null,
   endDate: null,
@@ -288,10 +288,8 @@ function search() {
   pageFirst.value = 0;
 }
 
-// 假資料（示意）
 const rawItems = ref([]);
 
-// 產生示意資料
 function createMock() {
   const cats = [
     { key: "latest", text: "最新消息" },
@@ -327,15 +325,12 @@ function createMock() {
 }
 onMounted(createMock);
 
-// 篩選後資料
 const filteredItems = computed(() => {
   const { startDate, endDate, keyword } = filters.value;
   const kw = (keyword || "").trim();
   return rawItems.value.filter((item) => {
-    // 日期
     if (startDate && item.date < normalizeDate(startDate)) return false;
     if (endDate && item.date > endOfDay(endDate)) return false;
-    // 關鍵字
     if (kw) {
       const hay = `${item.title} ${item.dept} ${item.categoryText}`.toLowerCase();
       if (!hay.includes(kw.toLowerCase())) return false;
@@ -344,12 +339,11 @@ const filteredItems = computed(() => {
   });
 });
 
-// 分頁
-const pageFirst = ref(0); // 目前第一筆 index
-const rows = ref(10); // 每頁筆數
-const pagedItems = computed(() => {
-  return filteredItems.value.slice(pageFirst.value, pageFirst.value + rows.value);
-});
+const pageFirst = ref(0);
+const rows = ref(10);
+const pagedItems = computed(() =>
+  filteredItems.value.slice(pageFirst.value, pageFirst.value + rows.value)
+);
 function onPage(e) {
   pageFirst.value = e.first;
   rows.value = e.rows;
@@ -357,15 +351,11 @@ function onPage(e) {
 
 const emptyText = "查無符合條件的資料";
 
-// 點列（可依你的實際詳文路由改寫）
 const router = useRouter();
 function onRowClick(evt) {
-  // 若你有詳文路由，改成：router.push({ name: 'news-article', params: { id: evt.data.id } })
-  // 這裡先示意跳同頁不動作
+  // 可在此導向詳文
 }
 
-// ————————————————————
-// 工具：日期格式
 function formatDate(d) {
   const dt = new Date(d);
   const y = dt.getFullYear();
@@ -386,7 +376,6 @@ function endOfDay(d) {
 </script>
 
 <style scoped>
-/* 列印樣式（僅此頁） */
 @media print {
   :host,
   .max-w-7xl {

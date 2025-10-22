@@ -2,12 +2,9 @@
 <template>
   <div class="mx-auto max-w-7xl px-4 py-6">
     <div class="flex gap-6">
-      <!-- 側欄 -->
-      <AboutSidebar class="hidden lg:block" :items="aboutMenu" />
+      <AboutSidebar class="hidden lg:block text-xl" :items="aboutMenu" />
 
-      <!-- 主內容 -->
       <main class="flex-1 min-w-0" id="main">
-        <!-- 標題列 -->
         <header class="flex items-end justify-between gap-4">
           <div class="min-w-0">
             <h1
@@ -15,18 +12,22 @@
             >
               鹿谷簡介
             </h1>
-            <Breadcrumb class="mt-2" :model="breadcrumbModel" :home="breadcrumbHome" />
+            <Breadcrumb
+              class="mt-2 text-xl"
+              :model="breadcrumbModel"
+              :home="breadcrumbHome"
+            />
           </div>
 
-          <!-- 字級＋列印 -->
           <div class="flex items-center gap-2">
-            <span class="text-sm text-slate-500 mr-1">字級</span>
+            <span class="text-lg text-slate-500 mr-1">字級</span>
             <Button
               label="小"
               size="small"
               severity="secondary"
               :outlined="fontScale !== 'sm'"
               :raised="fontScale === 'sm'"
+              class="text-xl"
               @click="setFont('sm')"
             />
             <Button
@@ -35,6 +36,7 @@
               severity="secondary"
               :outlined="fontScale !== 'md'"
               :raised="fontScale === 'md'"
+              class="text-xl"
               @click="setFont('md')"
             />
             <Button
@@ -43,6 +45,7 @@
               severity="secondary"
               :outlined="fontScale !== 'lg'"
               :raised="fontScale === 'lg'"
+              class="text-xl"
               @click="setFont('lg')"
             />
             <div class="w-px h-6 bg-slate-200 mx-2" aria-hidden="true"></div>
@@ -51,12 +54,12 @@
               label="列印"
               size="small"
               severity="help"
+              class="text-xl"
               @click="printPage"
             />
           </div>
         </header>
 
-        <!-- 單篇文章：鹿谷簡介 -->
         <article
           :class="[
             'mt-4 rounded-lg border border-slate-200 bg-white p-4 md:p-6 leading-relaxed',
@@ -64,31 +67,29 @@
           ]"
           aria-label="鹿谷簡介文章"
         >
-          <!-- 標籤（可聚焦、鍵盤可讀） -->
           <div class="flex flex-wrap gap-2 mb-4" aria-label="文章標籤">
             <button
-              class="px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600"
+              class="px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-lg focus:outline-none focus:ring-2 focus:ring-emerald-600"
             >
               歷史沿革
             </button>
             <button
-              class="px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600"
+              class="px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-lg focus:outline-none focus:ring-2 focus:ring-emerald-600"
             >
               自然環境
             </button>
             <button
-              class="px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600"
+              class="px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-lg focus:outline-none focus:ring-2 focus:ring-emerald-600"
             >
               人口統計
             </button>
           </div>
 
-          <!-- 內文 -->
           <p class="text-slate-800">
             鹿谷鄉位於南投縣，所生產的茶葉與竹筍聞名全台，境內之溪頭森林遊樂區與實驗林，在台灣大學多年之經營與維護下，擁有豐富的森林生態研究資源，可提供作為自然生態系統運作的展示教室。鹿谷鄉的開發可大致區分為三個階段，即清治、日據與台灣光復三個時期：
           </p>
 
-          <h2 class="mt-6 mb-2 text-xl font-bold text-emerald-900">一、清治時期</h2>
+          <h2 class="mt-6 mb-2 text-3xl font-bold text-emerald-900">一、清治時期</h2>
           <p>
             鹿谷開拓始於清朝約當 1741
             年左右，最初以竹山為南投、台中地區的政治經濟中心，當時稱為林圮埔（係紀念鄭成功參軍林兒率部隊進入竹山、鹿谷一帶屯墾），即包括今日鹿谷地區，而歷經屯墾，包括初鄉、新寮、坪仔頂、車輄寮、小半天、內樹皮地區陸續開拓，並於道光
@@ -96,19 +97,19 @@
             年間，初鄉林鳳池舉人，從福建武夷山帶回軟枝烏龍茶栽種，位於凍頂上成為今日全鄉最重要之經濟作物凍頂烏龍茶。
           </p>
 
-          <h2 class="mt-6 mb-2 text-xl font-bold text-emerald-900">二、日據時期</h2>
+          <h2 class="mt-6 mb-2 text-3xl font-bold text-emerald-900">二、日據時期</h2>
           <p>
             民國前八年，日本殖民政府設置沙連堡羌仔寮區役場於鹿谷村新寮，民國元年將區役場移設鹿谷村現址，民國九年改制，將沙連堡羌仔寮區改為鹿谷庄，乃取本鄉山岳綿延、溪谷甚多而名之，此時，鹿谷發展已初具規模。
           </p>
 
-          <h2 class="mt-6 mb-2 text-xl font-bold text-emerald-900">三、台灣光復後</h2>
+          <h2 class="mt-6 mb-2 text-3xl font-bold text-emerald-900">三、台灣光復後</h2>
           <p>
             民國 34 年台灣光復，國民政府廢州郡改縣市，當時隸屬台中縣竹山區，民國 39
             年廢區改為南投縣鹿谷鄉，從此鹿谷行政區確立，並沿用至今，民國 44
             年行政區域調整共計 13 村。
           </p>
 
-          <h2 class="mt-6 mb-2 text-xl font-bold text-emerald-900">四、中華民國時期</h2>
+          <h2 class="mt-6 mb-2 text-3xl font-bold text-emerald-900">四、中華民國時期</h2>
           <p>
             民國 34 年台灣光復，國民政府廢州郡改縣市，當時隸屬台中縣竹山區，民國 39
             年廢區改為南投縣鹿谷鄉，從此鹿谷行政區確立，並沿用至今，民國 44
@@ -116,7 +117,7 @@
           </p>
 
           <p class="mt-6 text-slate-700">本鄉歷史發展重要事記</p>
-          <!-- 歷史發展表格 -->
+
           <div
             class="mt-3 overflow-x-auto rounded-lg border border-slate-200 focus-within:ring-2 focus-within:ring-emerald-600"
             tabindex="0"
@@ -234,12 +235,24 @@
 </template>
 
 <script setup>
+/*
+  文字等級整體 +2（Tailwind 標準階梯）：
+  - text-sm  → text-lg
+  - text-base → text-xl
+  - text-lg  → text-2xl
+  - text-xl  → text-3xl
+  - text-2xl → text-4xl
+  - text-3xl → text-5xl
+  並調整：
+  - Breadcrumb / Sidebar / 控制按鈕（Button）以 class 加大
+  - 自訂字級（fontScale）整體上移 2 級：sm→text-4xl/ text-lg、md→text-5xl/ text-xl、lg→text-6xl/ text-2xl
+*/
+
 import { ref, computed } from "vue";
 import AboutSidebar from "@/components/about/Sidebar.vue";
 import Breadcrumb from "primevue/breadcrumb";
 import Button from "primevue/button";
 
-/* 側欄選單（與你先前的一致） */
 const aboutMenu = [
   { label: "鹿谷簡介", to: { name: "about-overview" } },
   { label: "公所介紹", to: { name: "about-history" } },
@@ -253,23 +266,21 @@ const aboutMenu = [
   { label: "鄉志", to: { name: "about-chronicle" } },
 ];
 
-/* 麵包屑 */
 const breadcrumbHome = { icon: "pi pi-home", to: { name: "home" } };
 const breadcrumbModel = [
   { label: "關於鹿谷", to: { name: "about" } },
   { label: "鹿谷簡介" },
 ];
 
-/* 字級切換 */
 const fontScale = ref(localStorage.getItem("about.font") || "md");
 const fontSizeClasses = computed(() => {
   switch (fontScale.value) {
     case "sm":
-      return { title: "text-2xl", body: "text-[0.95rem]" };
+      return { title: "text-4xl", body: "text-lg" };
     case "lg":
-      return { title: "text-4xl", body: "text-[1.1rem]" };
+      return { title: "text-6xl", body: "text-2xl" };
     default:
-      return { title: "text-3xl", body: "text-base" };
+      return { title: "text-5xl", body: "text-xl" };
   }
 });
 function setFont(s) {

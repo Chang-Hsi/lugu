@@ -171,8 +171,23 @@ export const routes = [
     redirect: { name: 'council-chair' },
     meta: { title: '代表會', breadcrumb: ['首頁', '代表會'], icon: 'pi pi-briefcase', menu: true, order: 5 },
     children: [
-      { path: 'chair', name: 'council-chair', component: CouncilChair, meta: { title: '主席介紹', breadcrumb: ['首頁', '代表會', '主席介紹'] } },
-      { path: 'organization', name: 'council-organization', component: CouncilOrganization, meta: { title: '組織介紹', breadcrumb: ['首頁', '代表會', '組織介紹'] } },
+      // 主席介紹：保留原本獨立頁
+      { path: 'chair', name: 'council-chair', component: CouncilChair,
+        meta: { title: '主席介紹', breadcrumb: ['首頁', '代表會', '主席介紹'] } },
+
+      // 根據圖片新增的 4 個目錄（皆暫用同一畫面：CouncilOrganization.vue）
+      { path: 'assembly', name: 'council-assembly', component: CouncilOrganization,
+        meta: { title: '鄉民代表會', breadcrumb: ['首頁', '代表會', '鄉民代表會'] } },
+      { path: 'overseas-reports', name: 'council-overseas-reports', component: CouncilOrganization,
+        meta: { title: '出國考察報告', breadcrumb: ['首頁', '代表會', '出國考察報告'] } },
+      { path: 'activities', name: 'council-activities', component: CouncilOrganization,
+        meta: { title: '代表會活動', breadcrumb: ['首頁', '代表會', '代表會活動'] } },
+      { path: 'meetings', name: 'council-meetings', component: CouncilOrganization,
+        meta: { title: '會議資訊', breadcrumb: ['首頁', '代表會', '會議資訊'] } },
+
+      // 若仍需要「組織介紹」可保留；之後你也可把它換到真的組織頁
+      { path: 'organization', name: 'council-organization', component: CouncilOrganization,
+        meta: { title: '組織介紹', breadcrumb: ['首頁', '代表會', '組織介紹'] } },
     ]
   },
 
