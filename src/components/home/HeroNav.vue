@@ -3,8 +3,8 @@
   <section class="w-full">
     <div class="mx-auto max-w-7xl px-4">
       <header class="flex flex-col items-center text-center py-10">
-        <h1 class="text-3xl md:text-[34px] font-extrabold text-slate-900">網站導覽</h1>
-        <p class="mt-2 max-w-3xl text-slate-600">
+        <h1 class="text-5xl md:text-6xl font-extrabold text-slate-900">網站導覽</h1>
+        <p class="mt-2 max-w-3xl text-slate-600 text-xl">
           完整的網站資訊架構，幫助您快速找到所需的政府服務與資訊
         </p>
       </header>
@@ -17,7 +17,7 @@
         >
           <div class="h-full rounded-2xl border border-slate-200 bg-white">
             <div class="px-6 pt-6">
-              <h2 class="text-xl font-extrabold text-slate-900">{{ cat.title }}</h2>
+              <h2 class="text-3xl font-extrabold text-slate-900">{{ cat.title }}</h2>
               <div class="mt-3 h-[2px] w-full bg-emerald-500"></div>
             </div>
 
@@ -39,13 +39,13 @@
                     clip-rule="evenodd"
                   />
                 </svg>
-                <span class="text-[15px]">{{ item }}</span>
+                <span class="text-xl">{{ item }}</span>
               </li>
             </ul>
 
             <div class="px-6 pb-6">
               <span
-                class="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-[12px] text-slate-600"
+                class="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-base text-slate-600"
               >
                 共 {{ cat.items.length }} 項服務
               </span>
@@ -58,12 +58,12 @@
         <div
           class="mx-auto max-w-5xl rounded-2xl border border-emerald-200 bg-emerald-50 px-6 py-8 text-center"
         >
-          <h3 class="text-xl font-extrabold text-slate-900">需要協助？</h3>
-          <p class="mt-2 text-slate-700">
+          <h3 class="text-3xl font-extrabold text-slate-900">需要協助？</h3>
+          <p class="mt-2 text-slate-700 text-xl">
             如果您無法找到所需資訊，歡迎透過以下方式聯絡我們
           </p>
           <div
-            class="mt-4 flex flex-wrap items-center justify-center gap-6 text-slate-700"
+            class="mt-4 flex flex-wrap items-center justify-center gap-6 text-slate-700 text-xl"
           >
             <div class="flex items-center gap-2">
               <svg
@@ -117,6 +117,19 @@
 </template>
 
 <script setup>
+/*
+  文字等級整體 +2 說明（Tailwind 標準階梯）：
+  - text-xs  → text-base
+  - text-sm  → text-lg
+  - text-base → text-xl
+  - text-lg  → text-2xl
+  - text-xl  → text-3xl
+  - text-2xl → text-4xl
+  - text-3xl → text-5xl
+  - 響應式亦同；原本的 md:text-[34px] 以「+2 等級」概念轉為 md:text-6xl
+  - 未標文字大小者視為 base → 補上較符合層級的 text-xl / text-3xl
+*/
+
 // 分類與清單資料
 const categories = [
   {

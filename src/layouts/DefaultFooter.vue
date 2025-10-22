@@ -170,23 +170,7 @@
 
       <!-- 夥伴/標章 與 建議瀏覽器 -->
       <div class="mt-6 flex items-center justify-between gap-4 flex-wrap">
-        <div class="flex items-center gap-3">
-          <img
-            src="https://images.unsplash.com/photo-1513258496099-48168024aec0?q=80&w=300"
-            alt=""
-            class="h-16 w-28 rounded object-cover"
-          />
-          <img
-            src="https://images.unsplash.com/photo-1513258496099-48168024aec0?q=80&w=300"
-            alt=""
-            class="h-16 w-28 rounded object-cover"
-          />
-          <img
-            src="https://images.unsplash.com/photo-1513258496099-48168024aec0?q=80&w=300"
-            alt=""
-            class="hidden md:block h-16 w-28 rounded object-cover"
-          />
-        </div>
+        <div class="flex items-center gap-3"></div>
         <div class="text-right text-slate-400 text-sm leading-6">
           <div>建議瀏覽器：Chrome、Firefox、Safari、Edge</div>
           <div>建議解析度：1024×768 以上</div>

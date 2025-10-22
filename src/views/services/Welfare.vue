@@ -59,7 +59,7 @@
         <!-- 圖標牆（等寬等高） -->
         <section class="mt-5">
           <ul
-            class="grid gap-5 [grid-template-columns:repeat(auto-fit,minmax(220px,1fr))]"
+            class="grid gap-5 grid-cols-[repeat(auto-fit,minmax(220px,1fr))]"
             role="list"
             aria-label="社會福利項目"
           >

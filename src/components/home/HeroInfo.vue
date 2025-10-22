@@ -1,19 +1,16 @@
 <!-- src/components/HeroInfo.vue -->
 <template>
   <section class="mx-auto px-4 py-12" role="region" aria-label="資訊看板">
-    <h2 class="text-center text-2xl md:text-3xl font-extrabold text-slate-800">
+    <h2 class="text-center text-4xl md:text-5xl font-extrabold text-slate-800">
       資訊看板
     </h2>
 
-    <!-- 卡片群：flex 佈局 + RWD -->
     <div class="mt-8 flex flex-wrap gap-6 justify-center">
-      <!-- 單一卡片 -->
       <article
         v-for="card in visibleCards"
         :key="card.key"
         class="w-full sm:basis-[calc(50%-12px)] lg:basis-[calc(25%-18px)] xl:basis-[calc(20%-88px)] rounded-xl shadow-md bg-white overflow-hidden focus-within:ring-2 focus-within:ring-emerald-600"
       >
-        <!-- 卡片抬頭 -->
         <header
           class="h-12 px-4 rounded-t-xl text-white flex items-center gap-2"
           :class="card.headClass"
@@ -23,16 +20,15 @@
           </span>
           <RouterLink
             v-if="card.to"
-            class="font-semibold hover:underline focus:outline-none focus:underline"
+            class="font-semibold hover:underline focus:outline-none focus:underline text-xl"
             :to="card.to"
             :aria-label="`前往 ${card.title} 列表頁`"
           >
             {{ card.title }}
           </RouterLink>
-          <span v-else class="font-semibold">{{ card.title }}</span>
+          <span v-else class="font-semibold text-xl">{{ card.title }}</span>
         </header>
 
-        <!-- 列表 -->
         <div class="p-4">
           <ul class="flex flex-col">
             <li
@@ -49,17 +45,17 @@
                   <div class="flex items-center gap-2">
                     <span
                       v-if="item.isNew"
-                      class="inline-flex items-center rounded-full bg-red-500 text-white text-xs px-2 py-0.5"
+                      class="inline-flex items-center rounded-full bg-red-500 text-white text-base px-2 py-0.5"
                       aria-label="最新"
                       >NEW</span
                     >
                     <span
-                      class="font-medium text-slate-900 group-hover:text-emerald-700 line-clamp-1"
+                      class="font-medium text-slate-900 group-hover:text-emerald-700 line-clamp-1 text-xl"
                     >
                       {{ item.title }}
                     </span>
                   </div>
-                  <div class="mt-1 flex items-center gap-2 text-slate-500 text-sm">
+                  <div class="mt-1 flex items-center gap-2 text-slate-500 text-lg">
                     <ClockIcon class="h-4 w-4" aria-hidden="true" />
                     <time :datetime="item.date">{{ item.date }}</time>
                   </div>
@@ -71,15 +67,15 @@
                   <div class="flex items-center gap-2">
                     <span
                       v-if="item.isNew"
-                      class="inline-flex items-center rounded-full bg-red-500 text-white text-xs px-2 py-0.5"
+                      class="inline-flex items-center rounded-full bg-red-500 text-white text-base px-2 py-0.5"
                       aria-label="最新"
                       >NEW</span
                     >
-                    <span class="font-medium text-slate-900 line-clamp-1">
+                    <span class="font-medium text-slate-900 line-clamp-1 text-xl">
                       {{ item.title }}
                     </span>
                   </div>
-                  <div class="mt-1 flex items-center gap-2 text-slate-500 text-sm">
+                  <div class="mt-1 flex items-center gap-2 text-slate-500 text-lg">
                     <ClockIcon class="h-4 w-4" aria-hidden="true" />
                     <time :datetime="item.date">{{ item.date }}</time>
                   </div>
@@ -88,18 +84,17 @@
             </li>
           </ul>
 
-          <!-- 查看更多 -->
           <div class="mt-3">
             <RouterLink
               v-if="card.to"
               :to="card.to"
-              class="inline-flex items-center gap-1 text-indigo-700 font-semibold hover:underline focus:outline-none focus:underline"
+              class="inline-flex items-center gap-1 text-indigo-700 font-semibold hover:underline focus:outline-none focus:underline text-xl"
               :aria-label="`查看更多 ${card.title}`"
             >
               查看更多
               <ArrowRightIcon class="h-4 w-4" aria-hidden="true" />
             </RouterLink>
-            <span v-else class="inline-flex items-center gap-1 text-slate-400">
+            <span v-else class="inline-flex items-center gap-1 text-slate-400 text-xl">
               尚未設定路由
             </span>
           </div>
@@ -110,6 +105,19 @@
 </template>
 
 <script setup>
+/*
+  文字等級整體 +2 說明（Tailwind 預設階梯）：
+  - text-xs  → text-base
+  - text-sm  → text-lg
+  - text-base → text-xl
+  - text-lg  → text-2xl
+  - text-xl  → text-3xl
+  - text-2xl → text-4xl
+  - text-3xl → text-5xl
+  - 響應式亦同（例如 md:text-3xl → md:text-5xl）
+  - 沒有指定文字大小的標籤，視為 base → 統一補上 text-xl（如卡片標題、按鈕/連結等）
+*/
+
 import { computed } from "vue";
 import { useRouter, RouterLink } from "vue-router";
 
@@ -146,10 +154,7 @@ const ArrowRightIcon = {
 
 const router = useRouter();
 
-/* 
-  卡片資料：你可以直接在這裡串 API 後代入 items。
-  routeName 對應你的路由名稱；如果不存在，卡片會被自動隱藏。
-*/
+/* 卡片資料（可改為串 API 後代入 items） */
 const rawCards = [
   {
     key: "latest",
@@ -182,7 +187,7 @@ const rawCards = [
     title: "活動專區",
     headClass: "bg-violet-600",
     icon: CalendarIcon,
-    routeName: "news-events", // 你目前 routes 沒有此路由 → 會被自動隱藏
+    routeName: "news-events",
     items: [
       { title: "2024鹿谷茶葉節", date: "2024/04/20", isNew: true },
       { title: "社區健康講座", date: "2024/03/25" },
@@ -208,7 +213,7 @@ const rawCards = [
     title: "永續提升",
     headClass: "bg-green-600",
     icon: LeafIcon,
-    routeName: "policy-sustainability", // 目前沒有 → 會被自動隱藏（之後你可改成存在的路由）
+    routeName: "policy-sustainability",
     items: [
       { title: "綠能發展計畫", date: "2024/03/15", isNew: true },
       { title: "生態保育推廣", date: "2024/03/12" },
@@ -218,14 +223,12 @@ const rawCards = [
   },
 ];
 
-// 依 router 是否存在該 routeName 來產生可顯示卡片
-const visibleCards = computed(
-  () =>
-    rawCards
-      .map((c) => ({
-        ...c,
-        to: router.hasRoute(c.routeName) ? { name: c.routeName } : null,
-      }))
-      .filter((c) => c.to) // 若你想先顯示但不連結，可把這行改成 .filter(() => true)
+const visibleCards = computed(() =>
+  rawCards
+    .map((c) => ({
+      ...c,
+      to: router.hasRoute(c.routeName) ? { name: c.routeName } : null,
+    }))
+    .filter((c) => c.to)
 );
 </script>

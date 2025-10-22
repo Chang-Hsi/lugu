@@ -1,7 +1,6 @@
 <!-- src/layouts/DefaultHeader.vue -->
 <template>
   <header id="header" class="w-full">
-    <!-- 跳至主內容（鍵盤使用者） -->
     <a
       href="#main"
       class="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 px-4 py-2 rounded bg-yellow-400 text-slate-900"
@@ -9,9 +8,8 @@
       跳至主內容
     </a>
 
-    <!-- 無障礙提示列 -->
     <div
-      class="w-full bg-emerald-800 text-white text-xs"
+      class="w-full bg-emerald-800 text-white text-base"
       role="region"
       aria-label="無障礙快速鍵說明列"
     >
@@ -55,7 +53,6 @@
       </div>
     </div>
 
-    <!-- 主列：Logo / 標題 / 搜尋 / 行動版選單鈕 -->
     <div class="w-full bg-white">
       <div class="mx-auto max-w-7xl px-4 py-4">
         <div class="flex items-center justify-between gap-4">
@@ -65,19 +62,18 @@
             aria-label="回首頁：南投縣鹿谷鄉公所"
           >
             <img
-              src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=200"
+              src="/public/logo.png"
               alt="鹿谷鄉公所標誌"
               class="h-14 w-14 rounded-full object-cover shrink-0"
             />
             <div class="flex flex-col min-w-0">
-              <h1 class="text-xl sm:text-2xl font-extrabold text-emerald-900 truncate">
+              <h1 class="text-3xl sm:text-4xl font-extrabold text-emerald-900 truncate">
                 南投縣鹿谷鄉公所
               </h1>
-              <p class="text-sm text-slate-600">Lugu Township Office, Nantou County</p>
+              <p class="text-lg text-slate-600">Lugu Township Office, Nantou County</p>
             </div>
           </RouterLink>
 
-          <!-- 搜尋（桌機） -->
           <form
             class="hidden md:flex items-center justify-end"
             role="search"
@@ -106,18 +102,17 @@
                 inputmode="search"
                 autocomplete="off"
                 placeholder="搜尋網站內容…"
-                class="w-full rounded-full bg-slate-100 pl-9 pr-12 py-2 text-sm placeholder-slate-400 outline-none focus:ring-2 focus:ring-emerald-600"
+                class="w-full rounded-full bg-slate-100 pl-9 pr-12 py-3 text-xl placeholder-slate-400 outline-none focus:ring-2 focus:ring-emerald-600"
               />
               <button
                 type="submit"
-                class="absolute right-1 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-full text-sm bg-emerald-700 text-white hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-600"
+                class="absolute right-1 top-1/2 -translate-y-1/2 px-4 py-2 rounded-full text-xl bg-emerald-700 text-white hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-600"
               >
                 搜尋
               </button>
             </div>
           </form>
 
-          <!-- 行動版：漢堡鈕 -->
           <button
             type="button"
             class="md:hidden inline-flex items-center justify-center rounded-lg h-10 w-10 text-slate-700 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-emerald-600"
@@ -150,16 +145,14 @@
         </div>
       </div>
 
-      <!-- ===== 主導覽列（桌機）—新增：滑鼠懸浮下拉，來源=router children ===== -->
       <div class="border-t border-slate-200 hidden md:block">
         <div class="mx-auto max-w-7xl px-4 relative">
           <nav
             id="primary-nav"
-            class="h-12 flex items-center gap-6 text-slate-800"
+            class="h-12 flex items-center gap-6 text-slate-800 text-xl"
             aria-label="主選單"
             role="menubar"
           >
-            <!-- 逐一產生頂層項與其下拉 -->
             <div
               v-for="(m, i) in menus"
               :key="m.label"
@@ -167,7 +160,6 @@
               @mouseenter="openIndex = i"
               @mouseleave="openIndex = -1"
             >
-              <!-- 頂層連結：可直接點到群組頁 -->
               <RouterLink
                 class="inline-flex items-center gap-1 px-1 py-2 hover:text-emerald-700 focus:outline-none focus:text-emerald-700"
                 :to="m.to"
@@ -187,7 +179,6 @@
                 </svg>
               </RouterLink>
 
-              <!-- 下拉選單 -->
               <div
                 v-if="m.items?.length"
                 class="absolute left-0 top-full z-50 hidden group-hover:flex group-focus-within:flex"
@@ -203,7 +194,7 @@
                     :key="it.label"
                     :to="it.to"
                     role="menuitem"
-                    class="block px-4 py-2 text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 focus:outline-none focus:bg-emerald-50 whitespace-nowrap"
+                    class="block px-4 py-2 text-slate-700 hover:bg-emerald-50 hover:text-emerald-700 focus:outline-none focus:bg-emerald-50 whitespace-nowrap text-xl"
                   >
                     {{ it.label }}
                   </RouterLink>
@@ -214,16 +205,13 @@
         </div>
         <div class="h-[2px] bg-amber-800"></div>
       </div>
-      <!-- ===== /主導覽列（桌機） ===== -->
 
-      <!-- 行動版：展開面板（原樣保留） -->
       <div v-show="menuOpen" class="md:hidden border-t border-slate-200">
         <div
           class="mx-auto max-w-7xl px-4 py-3 flex flex-col gap-3"
           role="dialog"
           aria-label="行動版主選單"
         >
-          <!-- 搜尋（行動版） -->
           <form
             class="flex items-stretch"
             role="search"
@@ -252,19 +240,18 @@
                 inputmode="search"
                 autocomplete="off"
                 placeholder="搜尋網站內容…"
-                class="w-full rounded-full bg-slate-100 pl-9 pr-24 py-2 text-sm placeholder-slate-400 outline-none focus:ring-2 focus:ring-emerald-600"
+                class="w-full rounded-full bg-slate-100 pl-9 pr-24 py-3 text-xl placeholder-slate-400 outline-none focus:ring-2 focus:ring-emerald-600"
               />
               <button
                 type="submit"
-                class="absolute right-1 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-full text-sm bg-emerald-700 text-white hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-600"
+                class="absolute right-1 top-1/2 -translate-y-1/2 px-4 py-2 rounded-full text-xl bg-emerald-700 text-white hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-600"
               >
                 搜尋
               </button>
             </div>
           </form>
 
-          <!-- 連結們（行動版仍用單層列出，需求如要展開 children 再告訴我） -->
-          <nav class="flex flex-col" aria-label="主選單（行動版）">
+          <nav class="flex flex-col text-xl" aria-label="主選單（行動版）">
             <RouterLink
               class="py-2 text-slate-800 hover:text-emerald-700 focus:outline-none focus:text-emerald-700"
               :to="{ name: 'news' }"
@@ -296,7 +283,7 @@
               >線上服務交流</RouterLink
             >
             <div
-              class="mt-1 flex items-center gap-3 text-sm text-slate-700 pt-2 border-t"
+              class="mt-1 flex items-center gap-3 text-lg text-slate-700 pt-2 border-t"
             >
               <span class="inline-flex items-center gap-1">
                 <svg
@@ -332,19 +319,24 @@
 </template>
 
 <script setup>
+/*
+  文字等級整體 +2（Tailwind 標準階梯）：
+  - text-xs  → text-base
+  - text-sm  → text-lg
+  - text-base → text-xl
+  - text-lg  → text-2xl
+  - text-xl  → text-3xl
+  - text-2xl → text-4xl
+  - 響應式亦同（例如 sm:text-2xl → sm:text-4xl）
+  - 未標文字大小的區塊，視語意層級補上 text-xl / text-lg（主選單、下拉選單、行動版清單、搜尋 input/button）
+*/
+
 import { ref, computed } from "vue";
 import { RouterLink } from "vue-router";
-import { getTopMenuItems } from "@/router"; // 直接使用你 router 匯出的工具
+import { getTopMenuItems } from "@/router";
 
-// 行動版開闔
 const menuOpen = ref(false);
-
-// 搜尋頁
 const searchAction = "/search";
-
-// 產生（頂層＋children）選單資料
 const menus = computed(() => getTopMenuItems());
-
-// 控制哪一個下拉打開（只用於 aria 與 v-if，實際顯示仍有 group-hover / focus-within）
 const openIndex = ref(-1);
 </script>

@@ -3,8 +3,8 @@
   <section class="bg-white">
     <div class="mx-auto max-w-7xl px-4 py-12">
       <header class="text-center">
-        <h2 class="text-2xl md:text-3xl font-extrabold text-slate-800">便民服務</h2>
-        <p class="mt-2 text-slate-500">快速入口，提升您的洽公效率</p>
+        <h2 class="text-4xl md:text-5xl font-extrabold text-slate-800">便民服務</h2>
+        <p class="mt-2 text-slate-500 text-xl">快速入口，提升您的洽公效率</p>
       </header>
 
       <div class="mt-8 flex flex-wrap justify-center gap-6">
@@ -29,8 +29,8 @@
               <i :class="['pi', tile.icon]" class="text-2xl" aria-hidden="true"></i>
             </span>
             <div class="mt-3 text-center">
-              <div class="font-bold tracking-wide">{{ tile.title }}</div>
-              <div class="text-white/90 text-sm mt-1">{{ tile.subtitle }}</div>
+              <div class="font-bold tracking-wide text-2xl">{{ tile.title }}</div>
+              <div class="text-white/90 text-lg mt-1">{{ tile.subtitle }}</div>
             </div>
           </component>
         </article>
@@ -41,9 +41,7 @@
         role="note"
         aria-label="緊急聯絡資訊"
       >
-        <div
-          class="flex flex-wrap items-center justify-center gap-3 text-sm md:text-base"
-        >
+        <div class="flex flex-wrap items-center justify-center gap-3 text-lg md:text-xl">
           <i class="pi pi-phone text-[18px]" aria-hidden="true"></i>
           <span class="font-semibold">緊急聯絡</span>
           <span class="opacity-70">｜</span>
@@ -67,6 +65,18 @@
 </template>
 
 <script setup>
+/*
+  文字等級整體 +2（Tailwind 標準階梯）：
+  - text-sm  → text-lg
+  - text-base → text-xl
+  - text-lg  → text-2xl
+  - text-xl  → text-3xl
+  - text-2xl → text-4xl
+  - text-3xl → text-5xl
+  - 響應式同理（例如 md:text-3xl → md:text-5xl）
+  - 未標文字大小者視為 base → 依層級補上 text-2xl / text-lg 等
+*/
+
 import { RouterLink } from "vue-router";
 
 /**
@@ -74,9 +84,7 @@ import { RouterLink } from "vue-router";
  * import 'primeicons/primeicons.css'
  */
 
-/**
- * 產生卡片背景（單色 + 漸層）
- */
+/** 產生卡片背景（單色 + 漸層） */
 function tileStyle(tile) {
   const map = {
     sky: ["#3B82F6", "#2563EB"],
@@ -91,24 +99,18 @@ function tileStyle(tile) {
     slate: ["#64748B", "#475569"],
   };
   const [from, to] = map[tile.color] || map.slate;
-  return {
-    background: `linear-gradient(135deg, ${from}, ${to})`,
-  };
+  return { background: `linear-gradient(135deg, ${from}, ${to})` };
 }
 
-/**
- * 使用 PrimeIcons 的圖標類別（pi pi-xxx）
- * 你可以在 https://primefaces.org/primeicons/ 查到完整清單
- */
+/** 使用 PrimeIcons 的圖標類別（pi pi-xxx） */
 const tiles = [
-  // 第 1 列
   {
     key: "traffic",
     title: "交通資訊",
     subtitle: "公車路線、停車資訊",
     to: { name: "services" },
     color: "sky",
-    icon: "pi-car", // 原 CarIcon
+    icon: "pi-car",
   },
   {
     key: "spots",
@@ -116,7 +118,7 @@ const tiles = [
     subtitle: "鹿谷觀光景點導覽",
     to: { name: "about" },
     color: "emerald",
-    icon: "pi-map-marker", // 原 PinIcon
+    icon: "pi-map-marker",
   },
   {
     key: "welfare",
@@ -124,7 +126,7 @@ const tiles = [
     subtitle: "補助申請、福利查詢",
     to: { name: "services-welfare" },
     color: "rose",
-    icon: "pi-heart", // 原 HeartIcon
+    icon: "pi-heart",
   },
   {
     key: "extensions",
@@ -132,7 +134,7 @@ const tiles = [
     subtitle: "公所各課室聯絡方式",
     to: { name: "services" },
     color: "violet",
-    icon: "pi-phone", // 原 PhoneIcon
+    icon: "pi-phone",
   },
   {
     key: "lamp",
@@ -140,7 +142,7 @@ const tiles = [
     subtitle: "路燈故障線上通報",
     href: "https://lulamp.lugu.gov.tw/",
     color: "amber",
-    icon: "pi-bolt", // 原 BulbIcon（用閃電代表）
+    icon: "pi-bolt",
   },
   {
     key: "road",
@@ -148,17 +150,15 @@ const tiles = [
     subtitle: "道路坑洞、設施損壞通報",
     to: { name: "online" },
     color: "orange",
-    icon: "pi-directions", // 原 RoadIcon
+    icon: "pi-directions",
   },
-
-  // 第 2 列
   {
     key: "debt",
     title: "最新債務",
     subtitle: "公共債務資訊揭露",
     to: { name: "policy" },
     color: "indigo",
-    icon: "pi-credit-card", // 原 CardIcon
+    icon: "pi-credit-card",
   },
   {
     key: "faq",
@@ -166,7 +166,7 @@ const tiles = [
     subtitle: "FAQ 快速解答",
     to: { name: "services" },
     color: "teal",
-    icon: "pi-question-circle", // 原 HelpIcon
+    icon: "pi-question-circle",
   },
   {
     key: "jobs",
@@ -174,7 +174,7 @@ const tiles = [
     subtitle: "職缺公告、甄選資訊",
     to: { name: "news" },
     color: "rose",
-    icon: "pi-users", // 原 UsersIcon
+    icon: "pi-users",
   },
   {
     key: "apply",
@@ -182,7 +182,7 @@ const tiles = [
     subtitle: "戶政、地政線上申請",
     to: { name: "services" },
     color: "cyan",
-    icon: "pi-file", // 原 FileIcon
+    icon: "pi-file",
   },
   {
     key: "meetings",
@@ -190,7 +190,7 @@ const tiles = [
     subtitle: "鄉政會議紀錄查詢",
     to: { name: "council" },
     color: "slate",
-    icon: "pi-list", // 原 ClipboardIcon
+    icon: "pi-list",
   },
   {
     key: "rent",
@@ -198,7 +198,7 @@ const tiles = [
     subtitle: "公共場館租借申請",
     to: { name: "services" },
     color: "emerald",
-    icon: "pi-building", // 原 BuildingIcon
+    icon: "pi-building",
   },
 ];
 </script>
