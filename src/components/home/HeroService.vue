@@ -36,6 +36,53 @@
         </article>
       </div>
 
+      <section ref="fbSection" class="mt-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="rounded-xl border border-slate-200 p-4">
+            <div
+              class="fb-page"
+              data-href="https://www.facebook.com/LuguOffice"
+              data-tabs="timeline"
+              data-width="500"
+              data-height=""
+              data-small-header="false"
+              data-adapt-container-width="true"
+              data-hide-cover="false"
+              data-show-facepile="true"
+            ></div>
+          </div>
+
+          <!-- 請調整這裡，目前只有一個貼文連結，請改為顯示多個，資料來自postLinks，由左到右排列，超出時換行，並且固定寬高，總高度需與左邊相同 -->
+          <div class="rounded-xl border border-slate-200 p-4">
+            <div
+              class="fb-post"
+              data-href="https://www.facebook.com/photo.php?fbid=1211190037705501&set=a.343066877851159&type=3"
+              data-width="500"
+              data-show-text="true"
+              data-adapt-container-width="true"
+            ></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- youtube影片嵌入 -->
+      <section class="mt-12">
+        <div class="rounded-xl border border-slate-200 overflow-hidden">
+          <div class="relative w-full pb-[56.25%]">
+            <iframe
+              class="absolute inset-0 h-full w-full"
+              src="https://www.youtube-nocookie.com/embed/HH0LDcch21Y"
+              title="YouTube video"
+              loading="lazy"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+              referrerpolicy="strict-origin-when-cross-origin"
+            ></iframe>
+          </div>
+        </div>
+      </section>
+
       <div
         class="mt-8 rounded-lg border border-rose-200 bg-rose-50/70 text-rose-700 px-4 py-4"
         role="note"
@@ -66,23 +113,17 @@
 
 <script setup>
 /*
-  文字等級整體 +2（Tailwind 標準階梯）：
-  - text-sm  → text-lg
-  - text-base → text-xl
-  - text-lg  → text-2xl
-  - text-xl  → text-3xl
-  - text-2xl → text-4xl
-  - text-3xl → text-5xl
-  - 響應式同理（例如 md:text-3xl → md:text-5xl）
-  - 未標文字大小者視為 base → 依層級補上 text-2xl / text-lg 等
+  嵌入 Facebook 外掛注意事項（已在本檔處理）：
+  1) 動態載入 FB SDK（zh_TW），只載一次（以 script#facebook-jssdk 判斷）。
+  2) SDK 讀取後，呼叫 window.FB.XFBML.parse(fbSectionEl) 解析該區塊 XFBML。
+  3) data-adapt-container-width="true" 可隨容器寬度自適應；若寬度不對可以調 data-width。
+  4) 你提供的網址我已放進去：
+     - 粉專： https://www.facebook.com/LuguOffice
+     - 相片： https://www.facebook.com/photo.php?fbid=1211190037705501&set=a.343066877851159&type=3
 */
 
+import { ref, onMounted, nextTick } from "vue";
 import { RouterLink } from "vue-router";
-
-/**
- * 若你尚未在專案入口引入 PrimeIcons，請加入：
- * import 'primeicons/primeicons.css'
- */
 
 /** 產生卡片背景（單色 + 漸層） */
 function tileStyle(tile) {
@@ -201,4 +242,59 @@ const tiles = [
     icon: "pi-building",
   },
 ];
+
+/* ===== Facebook Embed 邏輯 ===== */
+const fbSection = ref(null);
+
+/* 貼文牆連結（可增刪） */
+const postLinks = ref([
+  "https://www.facebook.com/photo.php?fbid=1211190037705501&set=a.343066877851159&type=3",
+  "https://www.facebook.com/photo/?fbid=1205003691670801&set=a.618732866964556",
+  "https://www.facebook.com/photo/?fbid=1204977825006721&set=a.618732866964556",
+  "https://www.facebook.com/photo/?fbid=1204152361755934&set=a.618732866964556",
+  "https://www.facebook.com/photo/?fbid=1203346135169890&set=a.618732866964556",
+]);
+
+function ensureFbRoot() {
+  if (!document.getElementById("fb-root")) {
+    const div = document.createElement("div");
+    div.id = "fb-root";
+    document.body.prepend(div);
+  }
+}
+
+function loadFacebookSDK(locale = "zh_TW") {
+  return new Promise((resolve) => {
+    if (window.FB) {
+      resolve(window.FB);
+      return;
+    }
+    if (document.getElementById("facebook-jssdk")) {
+      const check = () => (window.FB ? resolve(window.FB) : setTimeout(check, 50));
+      check();
+      return;
+    }
+    ensureFbRoot();
+    const js = document.createElement("script");
+    js.id = "facebook-jssdk";
+    js.async = true;
+    js.defer = true;
+    js.crossOrigin = "anonymous";
+    js.src = `https://connect.facebook.net/${locale}/sdk.js#xfbml=1&version=v20.0`;
+    js.onload = () => resolve(window.FB);
+    document.body.appendChild(js);
+  });
+}
+
+async function renderFbWidgets() {
+  await nextTick();
+  const FB = await loadFacebookSDK();
+  if (FB && fbSection.value) {
+    FB.XFBML.parse(fbSection.value);
+  }
+}
+
+onMounted(() => {
+  renderFbWidgets();
+});
 </script>

@@ -14,9 +14,23 @@
       aria-label="無障礙快速鍵說明列"
     >
       <div class="mx-auto max-w-7xl px-4 py-1 flex items-center justify-between gap-4">
-        <p>
-          無障礙快速鍵：Alt+U(上方功能) Alt+C(中央內容) Alt+S(下方功能) Alt+Z(網站導覽)
-        </p>
+        <div class="flex items-center gap-3">
+          <a
+            href="#main"
+            accesskey="C"
+            aria-describedby="ak-c"
+            aria-label="定位點：跳至主內容（Alt+C）"
+            class="inline-flex h-6 w-6 items-center justify-center rounded bg-emerald-600 text-white text-sm leading-none tracking-[0.2em] font-bold focus:outline-none focus:ring-2 focus:ring-white"
+            title="Alt+C 跳至主內容"
+            >:::</a
+          >
+          <span id="ak-c" class="sr-only">此定位點 Accesskey 為 Alt+C</span>
+
+          <p>
+            無障礙快速鍵：Alt+U(上方功能) Alt+C(中央內容) Alt+S(下方功能) Alt+Z(網站導覽)
+          </p>
+        </div>
+
         <nav class="hidden sm:flex items-center gap-3" aria-label="網站輔助選單">
           <span class="inline-flex items-center gap-1">
             <svg
@@ -130,13 +144,7 @@
             >
               <path d="M3 6h18v2H3V6Zm0 5h18v2H3v-2Zm0 5h18v2H3v-2Z" />
             </svg>
-            <svg
-              v-else
-              class="h-6 w-6"
-              viewBox="0 0 24 24"
-              fill="currentColor"
-              aria-hidden="true"
-            >
+            <svg v-else class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor">
               <path
                 d="M18.3 5.71 12 12.01l-6.29-6.3-1.42 1.42 6.3 6.29-6.3 6.29 1.42 1.42 6.29-6.3 6.29 6.3 1.42-1.42-6.3-6.29 6.3-6.29-1.42-1.42Z"
               />
@@ -404,4 +412,11 @@ const menus = ref([
     to: { name: "online" },
   },
 ]);
+
+/*
+說明：
+1) 已在頂端綠色列左側加入可見定位點「:::」，連到 #main，並設 accesskey="C"。
+2) 建議在頁面主內容容器加上 <main id="main">…</main>，頁尾有 <footer id="footer">…</footer>（若要做 Alt+B 可再加一個指向 #footer 的定位點）。
+3) 若想把 ::: 改成「六顆點」視覺，可用背景圖或把字距/行高微調；目前用 Tailwind 讓三個冒號等寬集中，聚焦有白色外框。
+*/
 </script>
