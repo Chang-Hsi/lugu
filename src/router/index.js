@@ -19,11 +19,8 @@ import AboutIndex from '@/views/about/Index.vue'
 import AboutOverview from '@/views/about/Overview.vue'
 import AboutIntroduce from '@/views/about/Introduce.vue'
 import AboutHistory from '@/views/about/History.vue'
-
-// About → Districts (13 村)
-import AboutDistrictsIndex from '@/views/about/districts/Index.vue'
-import VillageNeihu from '@/views/about/districts/Neihu.vue'
-import VillageHeya from '@/views/about/districts/Heya.vue'
+import AboutGeography from '@/views/about/Geography.vue'
+import AboutDistrict from '@/views/about/District.vue'
 
 // Policy
 import PolicyIndex from '@/views/policy/Index.vue'
@@ -96,17 +93,12 @@ export const routes = [
       { path: 'overview', name: 'about-overview', component: AboutOverview, meta: { title: '鹿谷簡介', breadcrumb: ['首頁', '關於本鄉', '鹿谷簡介'] } },
       { path: 'introduce', name: 'about-introduce', component: AboutIntroduce, meta: { title: '公所介紹', breadcrumb: ['首頁', '關於本鄉', '公所介紹'] } },
       { path: 'history', name: 'about-history', component: AboutHistory, meta: { title: '歷史沿革', breadcrumb: ['首頁', '關於本鄉', '歷史沿革'] } },
-      { path: 'geography',    name: 'about-geography',    component: AboutOverview, meta: { title: '自然環境' } },
+      { path: 'geography',    name: 'about-geography',    component: AboutGeography, meta: { title: '觀光景點', breadcrumb: ['首頁', '關於本鄉', '觀光景點'] }  },
       { path: 'specialty',    name: 'about-specialty',    component: AboutOverview, meta: { title: '特產介紹' } },
       { path: 'traffic',      name: 'about-traffic',      component: AboutOverview, meta: { title: '交通運輸' } },
       { path: 'departments',  name: 'about-departments',  component: AboutOverview, meta: { title: '各課室業務' } },
-      { path: 'district-map', name: 'about-district-map', component: AboutOverview, meta: { title: '行政區域圖' } },
+      { path: 'district-map', name: 'about-districts', component: AboutDistrict, meta: { title: '行政區域', breadcrumb: ['首頁', '關於本鄉', '行政區域'] } },
       { path: 'chronicle',    name: 'about-chronicle',    component: AboutOverview, meta: { title: '鄉志' } },
-
-      // 行政區
-      { path: 'districts', name: 'about-districts', component: AboutDistrictsIndex, meta: { title: '行政區', breadcrumb: ['首頁', '關於本鄉', '行政區'] } },
-      { path: 'districts/neihu', name: 'village-neihu', component: VillageNeihu, meta: { title: '內湖村', breadcrumb: ['首頁', '關於本鄉', '行政區', '內湖村'] } },
-      { path: 'districts/heya', name: 'village-heya', component: VillageHeya, meta: { title: '和雅村', breadcrumb: ['首頁', '關於本鄉', '行政區', '和雅村'] } },
     ]
   },
 

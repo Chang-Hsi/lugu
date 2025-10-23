@@ -262,7 +262,6 @@ const aboutMenu = [
   { label: "行政區域", to: { name: "about-districts" } },
   { label: "各課室業務", to: { name: "about-departments" } },
   { label: "課室分機", to: { name: "services" } },
-  { label: "行政區域圖", to: { name: "about-district-map" } },
   { label: "鄉志", to: { name: "about-chronicle" } },
 ];
 
