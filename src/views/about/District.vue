@@ -10,7 +10,7 @@
             <h1
               :class="['font-extrabold text-slate-800 truncate', fontSizeClasses.title]"
             >
-              觀光景點
+              行政區域
             </h1>
             <Breadcrumb
               class="mt-2 text-xl"
@@ -60,15 +60,21 @@
           </div>
         </header>
 
-        <!-- 互動式影像地圖 -->
-        <section>
+        <!-- 互動式影像地圖（未選擇時顯示） -->
+        <section v-if="!activeRegion">
           <LuguMap
             svg-url="/Lugu_villages.svg"
             :container-width="960"
             :region-meta="meta"
             :highlight-fill="'rgba(34,197,94,0.55)'"
             :label-source="'meta'"
+            @select="openDetail"
           />
+        </section>
+
+        <!-- 已選村：顯示介紹 -->
+        <section v-else>
+          <DistrictDetail :region="activeRegion" @close="activeRegion = null" />
         </section>
       </main>
     </div>
@@ -79,8 +85,16 @@
 import { ref, computed } from "vue";
 import AboutSidebar from "@/components/about/Sidebar.vue";
 import LuguMap from "@/components/about/LuguMap.vue";
+import DistrictDetail from "./DistrictDetail.vue";
 import Breadcrumb from "primevue/breadcrumb";
 import Button from "primevue/button";
+
+const activeRegion = ref(null);
+
+// 點擊「前往介紹」後接收 LuguMap 傳來的 region（內含 label/desc/link/img）
+function openDetail(region) {
+  activeRegion.value = region || null;
+}
 
 const aboutMenu = [
   { label: "鹿谷簡介", to: { name: "about-overview" } },
@@ -208,7 +222,7 @@ const meta = [
 const breadcrumbHome = { icon: "pi pi-home", to: { name: "home" } };
 const breadcrumbModel = [
   { label: "關於鹿谷", to: { name: "about" } },
-  { label: "觀光景點" },
+  { label: "行政區域" },
 ];
 
 const fontScale = ref(localStorage.getItem("about.font") || "md");

@@ -177,6 +177,7 @@ function emitSelect(region) {
     label: region.label,
     desc: region.desc,
     link: region.link,
+    img: region.img || "",
   });
 }
 function onKeydown(e, region) {
@@ -241,6 +242,7 @@ function applyMetaOrder() {
     r.label = m.label ?? r.label;
     r.desc = m.desc ?? r.desc;
     r.link = m.link ?? r.link;
+    r.img = m.img ?? r.img;
     r._el.setAttribute("aria-label", r.label || "");
   }
 }
