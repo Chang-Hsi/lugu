@@ -319,24 +319,88 @@
 </template>
 
 <script setup>
-/*
-  文字等級整體 +2（Tailwind 標準階梯）：
-  - text-xs  → text-base
-  - text-sm  → text-lg
-  - text-base → text-xl
-  - text-lg  → text-2xl
-  - text-xl  → text-3xl
-  - text-2xl → text-4xl
-  - 響應式亦同（例如 sm:text-2xl → sm:text-4xl）
-  - 未標文字大小的區塊，視語意層級補上 text-xl / text-lg（主選單、下拉選單、行動版清單、搜尋 input/button）
-*/
-
-import { ref, computed } from "vue";
+// 取代：原本有 `import { getTopMenuItems } from "@/router"`
+import { ref } from "vue";
 import { RouterLink } from "vue-router";
-import { getTopMenuItems } from "@/router";
 
+// 行為狀態
 const menuOpen = ref(false);
 const searchAction = "/search";
-const menus = computed(() => getTopMenuItems());
 const openIndex = ref(-1);
+
+// 改為在此手動管理選單（名稱請與你的路由 name 對應）
+const menus = ref([
+  {
+    label: "熱門消息",
+    to: { name: "news" },
+    items: [
+      { label: "最新消息", to: { name: "news-latest" } },
+      { label: "新聞稿", to: { name: "news-press" } },
+      { label: "招標公告", to: { name: "news-tenders" } },
+      { label: "徵才公告", to: { name: "news-jobs" } },
+      { label: "活動訊息", to: { name: "news-events" } },
+    ],
+  },
+  {
+    label: "關於本鄉",
+    to: { name: "about" },
+    items: [
+      { label: "鹿谷簡介", to: { name: "about-overview" } },
+      { label: "公所介紹", to: { name: "about-introduce" } },
+      { label: "觀光景點", to: { name: "about-geography" } },
+      { label: "特產介紹", to: { name: "about-specialty" } },
+      { label: "交通運輸", to: { name: "about-traffic" } },
+      { label: "行政區域", to: { name: "about-districts" } },
+      { label: "課室分機", to: { name: "about-departments" } },
+      { label: "行政區域圖", to: { name: "about-districts" } },
+      { label: "鄉志", to: { name: "about-chronicle" } },
+    ],
+  },
+  {
+    label: "法規政策",
+    to: { name: "policy" },
+    items: [
+      { label: "政策相關", to: { name: "policy-related" } },
+      { label: "年度經費", to: { name: "policy-annual-expense" } },
+      { label: "資訊公開", to: { name: "policy-open" } },
+      { label: "廉政園地", to: { name: "policy-integrity" } },
+      { label: "施工工程", to: { name: "policy-construction" } },
+      { label: "最新債務訊息", to: { name: "policy-debt" } },
+      { label: "災後復建審議", to: { name: "policy-post-disaster" } },
+      { label: "永續提升人行安全計畫", to: { name: "policy-pedestrian-safety" } },
+    ],
+  },
+  {
+    label: "便民服務",
+    to: { name: "services" },
+    items: [
+      { label: "社會福利", to: { name: "services-welfare" } },
+      { label: "防災專區", to: { name: "services-disaster" } },
+      { label: "兵役資訊", to: { name: "services-military" } },
+      { label: "鄉立幼兒園", to: { name: "services-kindergarten" } },
+      { label: "鹿谷鄉銘思堂", to: { name: "services-grace-hall" } },
+      { label: "相關連結", to: { name: "services-links" } },
+      { label: "常見問題", to: { name: "services-faq" } },
+      { label: "鹿谷鄉立圖書館", to: { name: "services-library" } },
+      {
+        label: "公職人員利益衝突迴避法身分關係公開專區",
+        to: { name: "services-conflict" },
+      },
+    ],
+  },
+  {
+    label: "代表會",
+    to: { name: "council" },
+    items: [
+      { label: "鄉民代表會", to: { name: "council-assembly" } },
+      { label: "出國考察報告", to: { name: "council-overseas-reports" } },
+      { label: "代表會活動", to: { name: "council-activities" } },
+      { label: "會議資訊", to: { name: "council-meetings" } },
+    ],
+  },
+  {
+    label: "線上服務交流",
+    to: { name: "online" },
+  },
+]);
 </script>
