@@ -351,6 +351,7 @@ const menus = ref([
       { label: "特產介紹", to: { name: "about-specialty" } },
       { label: "交通運輸", to: { name: "about-traffic" } },
       { label: "行政區域", to: { name: "about-districts" } },
+      { label: "各課室業務", to: { name: "about-departments" } },
       { label: "課室分機", to: { name: "about-departments" } },
       { label: "行政區域圖", to: { name: "about-districts" } },
       { label: "鄉志", to: { name: "about-chronicle" } },
