@@ -152,30 +152,59 @@
               >
                 查看完整行程
               </button>
+
+              <button
+                class="rounded-full bg-white px-4 py-2 font-semibold text-emerald-600 shadow hover:bg-blue-50 active:translate-y-px focus:outline-none focus:ring-2 focus:ring-white text-xl"
+                @click="lineDialogVisible = true"
+              >
+                加LINE好友
+              </button>
             </div>
           </div>
         </div>
       </div>
     </div>
+
+    <!-- 加 LINE 好友：PrimeVue Dialog -->
+    <Dialog
+      v-model:visible="lineDialogVisible"
+      modal
+      :draggable="false"
+      :dismissableMask="true"
+      :closable="true"
+      :style="{ width: '480px' }"
+      header="加入 LINE 好友"
+    >
+      <div class="flex flex-col items-center gap-4 px-1 py-1 pb-5">
+        <img
+          :src="qrUrl"
+          alt="LINE 加好友 QR Code"
+          class="w-56 h-56 rounded-md border border-slate-200 bg-white object-contain"
+        />
+        <div class="text-center">
+          <div class="text-base text-slate-600">掃描上方 QR Code 加入好友</div>
+        </div>
+
+        <div v-if="copied" class="text-emerald-600 text-sm">已複製到剪貼簿</div>
+      </div>
+    </Dialog>
   </section>
 </template>
 
 <script setup>
 /*
-  文字等級整體 +2 說明（依 Tailwind 預設階梯）：
-  - text-sm  → text-lg
-  - text-base → text-xl
-  - text-lg  → text-2xl
-  - text-xl  → text-3xl
-  - text-2xl → text-4xl
-  - text-3xl → text-5xl
-  - text-5xl → text-7xl
-  - 響應式亦同（例如 md:text-5xl → md:text-7xl）
-  - 沒有指定文字大小的按鈕/標籤，視為 base → 統一補上 text-xl
+  這段為原有輪播邏輯，未改動；下方新增了：
+  1) lineDialogVisible：控制彈窗顯示
+  2) LINE_ID / addFriendUrl / qrUrl：LINE 假 ID、加好友連結與 QR 圖片來源
+     - qrUrl 使用免費 QR 產生服務 api.qrserver.com（免安裝套件）
+     - 若未來要本地產生，可改用 'qrcode' 套件產生 dataURL
+  3) copyLineId()：複製 LINE ID
+  4) openAddFriend()：用戶在手機上可直接開啟 LINE 加好友（瀏覽器也會導到對應頁）
 */
-
 import { ref, onMounted, onBeforeUnmount } from "vue";
 import { RouterLink } from "vue-router";
+import Dialog from "primevue/dialog";
+import Button from "primevue/button";
 
 const slides = ref([
   {
@@ -226,7 +255,6 @@ function prev() {
 function go(i) {
   current.value = i;
 }
-
 function start() {
   stop();
   if (!autoPlay.value) return;
@@ -244,7 +272,40 @@ function pause() {
 function resume() {
   start();
 }
-
 onMounted(start);
 onBeforeUnmount(stop);
+
+/* ====== 新增：LINE 好友彈窗邏輯 ====== */
+const lineDialogVisible = ref(false);
+
+/* 假的 LINE 官方帳號 ID（或個人 ID），若要真實值請改這裡 */
+const LINE_ID = "@lugu1234";
+
+/*
+  官方常見加好友連結格式：
+  - 官方帳號（有 @）：https://line.me/R/ti/p/@你的ID
+  - 若未來要改為 line://ti/p/@你的ID 也可嘗試（行動裝置優先）
+*/
+const addFriendUrl = `https://line.me/R/ti/p/${encodeURIComponent(LINE_ID)}`;
+
+/* 使用線上 QR 產生服務（免裝套件）；240x240 可自行調整 */
+const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=${encodeURIComponent(
+  addFriendUrl
+)}`;
+
+const copied = ref(false);
+async function copyLineId() {
+  try {
+    await navigator.clipboard.writeText(LINE_ID);
+    copied.value = true;
+    setTimeout(() => (copied.value = false), 1500);
+  } catch (err) {
+    copied.value = false;
+    window.open(addFriendUrl, "_blank");
+  }
+}
+
+function openAddFriend() {
+  window.open(addFriendUrl, "_blank");
+}
 </script>
