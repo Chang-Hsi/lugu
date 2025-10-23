@@ -13,14 +13,45 @@
             </h1>
             <Breadcrumb class="mt-2 text-xl" :model="bcModel" :home="bcHome" />
           </div>
-          <Button
-            icon="pi pi-print"
-            label="列印"
-            size="small"
-            severity="help"
-            class="text-xl"
-            @click="window.print()"
-          />
+          <div class="flex items-center gap-2">
+            <span class="text-lg text-slate-500 mr-1">字級</span>
+            <Button
+              label="小"
+              size="small"
+              severity="secondary"
+              :outlined="fontScale !== 'sm'"
+              :raised="fontScale === 'sm'"
+              class="text-xl"
+              @click="setFont('sm')"
+            />
+            <Button
+              label="中"
+              size="small"
+              severity="secondary"
+              :outlined="fontScale !== 'md'"
+              :raised="fontScale === 'md'"
+              class="text-xl"
+              @click="setFont('md')"
+            />
+            <Button
+              label="大"
+              size="small"
+              severity="secondary"
+              :outlined="fontScale !== 'lg'"
+              :raised="fontScale === 'lg'"
+              class="text-xl"
+              @click="setFont('lg')"
+            />
+            <div class="w-px h-6 bg-slate-200 mx-2" aria-hidden="true"></div>
+            <Button
+              icon="pi pi-print"
+              label="列印"
+              size="small"
+              severity="help"
+              class="text-xl"
+              @click="printPage"
+            />
+          </div>
         </header>
 
         <section

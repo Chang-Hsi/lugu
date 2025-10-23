@@ -203,7 +203,7 @@
             </div>
           </nav>
         </div>
-        <div class="h-[2px] bg-amber-800"></div>
+        <div class="h-0.5 bg-amber-800"></div>
       </div>
 
       <div v-show="menuOpen" class="md:hidden border-t border-slate-200">
@@ -312,7 +312,7 @@
             </div>
           </nav>
         </div>
-        <div class="h-[2px] bg-amber-800"></div>
+        <div class="h-0.5 bg-amber-800"></div>
       </div>
     </div>
   </header>
@@ -342,7 +342,7 @@ const menus = ref([
     ],
   },
   {
-    label: "關於本鄉",
+    label: "關於鹿谷",
     to: { name: "about" },
     items: [
       { label: "鹿谷簡介", to: { name: "about-overview" } },
